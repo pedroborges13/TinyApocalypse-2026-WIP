@@ -130,6 +130,8 @@ MonoBehaviour:
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 201
+  defaultPoolCapacity: 20
+  maxPoolSize: 100
 --- !u!4 &588593463147314498 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 59c4b7eab4ecf1441b0fe86e69ebf25a, type: 3}

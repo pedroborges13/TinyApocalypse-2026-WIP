@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     private int currentPierce;
 
-    private IObjectPool<Projectile> _pool;
+    private IObjectPool<Projectile> pool;
 
     void Awake()
     {
@@ -30,7 +30,10 @@ public class Projectile : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    public void SetPool(IObjectPool<Projectile> pool) => _pool = pool;
+    public void SetPool(IObjectPool<Projectile> pool)
+    {
+        this.pool = pool;
+    }
 
     public void Setup(WeaponData data)
     {
@@ -39,24 +42,25 @@ public class Projectile : MonoBehaviour
         currentPierce = data.PierceCount;
         speed = data.ProjectileSpeed;
 
+        //Resets visual and physical state for Pooling
         rb.linearVelocity = transform.forward * data.ProjectileSpeed;
 
-        if (meshRenderer != null) meshRenderer.enabled = true;
-        if (trail != null) trail.Clear();
+        if (meshRenderer != null) meshRenderer.enabled = true; //Ensures it is visible
+        if (trail != null) trail.Clear(); //Clears old trail and avoid drawing lines when teleporting
 
-        CancelInvoke(nameof(ReturnToPool));
+        CancelInvoke(nameof(ReturnToPool)); //Cancels previous Invokes to avoid bugs
         Invoke(nameof(ReturnToPool), lifeTime);
     }
 
     void FixedUpdate()
     {
-        if (rb.linearVelocity.sqrMagnitude < 0.1f) return;
+        if (rb.linearVelocity.sqrMagnitude < 0.1f) return; //Skips processing if velocity is too low (performance optimisation)
 
         float travelDistance = speed * Time.fixedDeltaTime;
         
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, travelDistance))
         {
-            transform.position = hit.point;
+            transform.position = hit.point; //Moves to the impact point 
             rb.linearVelocity = Vector3.zero;
             ProcessCollision(hit.collider, hit.normal);
         }
@@ -79,7 +83,6 @@ public class Projectile : MonoBehaviour
             if (currentPierce <= 0)
             {
                 ReturnToPool();
-                //StopProjectileVisually();
             }
             else
             {
@@ -101,12 +104,12 @@ public class Projectile : MonoBehaviour
 
     void ReturnToPool()
     {
-        CancelInvoke(nameof(ReturnToPool));
-        if (_pool != null) _pool.Release(this);
-        else Destroy(gameObject);
+        CancelInvoke(nameof(ReturnToPool)); //Cancels the lifetime timer if it's still running (in case it hit something before the time)
+        if (pool != null) pool.Release(this); //Sends back to the pool
+        else Destroy(gameObject); //Destroy as fallback when pool unavailable 
     }
 
-    void StopProjectileVisually()
+    /*void StopProjectileVisually()
     {
         rb.linearVelocity = Vector3.zero;
         if (trail != null) trail.emitting = false;
@@ -115,5 +118,5 @@ public class Projectile : MonoBehaviour
         if (mesh != null) mesh.enabled = false;
 
         Destroy(gameObject, 0.01f);
-    }
+    }*/
 }

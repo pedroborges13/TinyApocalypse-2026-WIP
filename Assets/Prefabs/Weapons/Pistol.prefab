@@ -135,3 +135,5 @@ MonoBehaviour:
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  defaultPoolCapacity: 20
+  maxPoolSize: 100

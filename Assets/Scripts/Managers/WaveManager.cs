@@ -2,7 +2,11 @@ using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.Pool;
 using UnityEngine.Rendering;
 using static UnityEngine.EventSystems.EventTrigger;
 using Random = UnityEngine.Random;
@@ -37,6 +41,12 @@ public class WaveManager : MonoBehaviour
     private int enemiesKilled;
     private int totalEnemies;
 
+    //Pools (Separate for each enemy type)
+    private IObjectPool<GameObject> normalPool;
+    private IObjectPool<GameObject> runnerPool;
+    private IObjectPool<GameObject> bossPool;
+
+
     //Events
     public event Action OnWaveStarted;
     public event Action OnWaveEnded;
@@ -45,12 +55,40 @@ public class WaveManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        normalPool = CreateEnemyPool(database.normalPrefab);
+        runnerPool = CreateEnemyPool(database.runnerPrefab);
+        bossPool = CreateEnemyPool(database.bossPrefab);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         GlobalEvents.OnEnemyKilled += CheckWaveEnded;
+    }
+
+    IObjectPool<GameObject> CreateEnemyPool(GameObject prefab)
+    {
+        GameObject currentPrefab = prefab;
+
+        IObjectPool<GameObject> newPool = null;
+        newPool = new UnityEngine.Pool.ObjectPool<GameObject>(CreateNewObject, GetFromPool, BackToPool, OnDestroyObject, false, 20, 150); 
+
+        return newPool;
+
+        GameObject CreateNewObject()
+        {
+            GameObject enemyObj = Instantiate(currentPrefab);
+
+            PooledEnemy pooledEnemy = enemyObj.AddComponent<PooledEnemy>();
+            pooledEnemy.SetPool(newPool); //Tells the enemy which pool it came from
+
+            return enemyObj; //Returns
+        }
+
+        void GetFromPool (GameObject obj) => obj.SetActive(true);
+        void BackToPool(GameObject obj) => obj.SetActive(false);
+        void OnDestroyObject (GameObject obj) => Destroy(obj);  
     }
 
     public void StartWave(int waveNumber)
@@ -84,7 +122,7 @@ public class WaveManager : MonoBehaviour
 
         //Ensures the chance is never less than 0 or bigger than 1 (100%)
         currentRunnerChance = Mathf.Clamp01(currentRunnerChance);
-        Debug.Log($"Wave {waveNumber}: Chance de Runner é de {currentRunnerChance * 100}%");
+        Debug.Log($"Wave {waveNumber}: Runner chance is: {currentRunnerChance * 100}%");
 
         // ----- TOTAL CALCULATION -----
         //Calculate total enemies for the wave
@@ -93,8 +131,8 @@ public class WaveManager : MonoBehaviour
 
         enemiesKilled = 0;
 
-        Debug.Log($"Iniciando Wave {waveNumber}: {totalEnemies} inimigos totais.");
-        //OnWaveStarted?
+        Debug.Log($"Starting Wave {waveNumber}: {totalEnemies} total enemies.");
+        OnWaveStarted?.Invoke();
 
         StartCoroutine(SpawnProceduralRoutine(totalGroups, enemiesPerGroup, currentRunnerChance, waveNumber));
     }
@@ -137,11 +175,27 @@ public class WaveManager : MonoBehaviour
     {
         if (prefab == null) return; 
 
+        IObjectPool<GameObject> selectedPool = null;    
+        if (prefab == database.normalPrefab) selectedPool = normalPool;
+        else if (prefab == database.runnerPrefab) selectedPool = runnerPool;
+        else if (prefab ==  database.bossPrefab) selectedPool = bossPool;
+
+        if (selectedPool == null) return;
+
+        GameObject enemy = selectedPool.Get();
+        var agent = enemy.GetComponent<NavMeshAgent>();
+        agent.enabled = true;
+        agent.isStopped = false;
+
         Transform selectedPoint = spawnPoints[pointIndex];
         Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)); //Small position variation to prevent them from spawning too close together
-        GameObject enemy = Instantiate(prefab, selectedPoint.position + randomOffset, Quaternion.identity);
+        float yOffset = 0.5f;
+        Vector3 spawnPos = selectedPoint.position + randomOffset + (Vector3.up * yOffset);
 
-        //Apply difficulty buffs via EntityStats
+        enemy.transform.position = spawnPos;
+        enemy.transform.rotation = Quaternion.identity;
+
+        //Apply difficulty buffs via EntityStats and Reset stats
         if (enemy.TryGetComponent<EntityStats>(out EntityStats stats)) //TryGetComponent performs a single operation (better performance than GetComponent + null check)
         {
             stats.SetupEnemyStats(hpMod, speedMod); //Accesses EntityStats public method
@@ -154,10 +208,7 @@ public class WaveManager : MonoBehaviour
         enemiesKilled++;
         Debug.Log($"Enemies: {enemiesKilled} / {totalEnemies}");
 
-        if(enemiesKilled >= totalEnemies)
-        {
-            OnWaveEnded?.Invoke();
-        }
+        if (enemiesKilled >= totalEnemies) OnWaveEnded?.Invoke();
     }
 
     void OnDisable()

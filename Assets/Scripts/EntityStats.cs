@@ -106,10 +106,15 @@ public class EntityStats : MonoBehaviour
             agent.enabled = false;
         }
     }
+
     void Death()
     {
-        IsDead = true;  
-        if(CompareTag("Player")) playerController.enabled = false;
-        Destroy(gameObject,1);
+        IsDead = true;
+        if (CompareTag("Player")) playerController.enabled = false;
+        if (TryGetComponent<PooledEnemy>(out PooledEnemy pooledEnemy))
+        {
+            pooledEnemy.ReturnToPool();
+        }
+        else Destroy(pooledEnemy, 1);
     }
 }
