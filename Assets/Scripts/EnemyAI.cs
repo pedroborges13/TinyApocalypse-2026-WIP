@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -73,7 +74,9 @@ public class EnemyAI : MonoBehaviour
     void SwitchState(State newState)
     {
         currentState = newState;
-        
+
+        if (agent == null || !agent.isActiveAndEnabled || !agent.isOnNavMesh) return;
+
         switch (currentState)
         {
             case State.Chasing:
@@ -291,6 +294,27 @@ public class EnemyAI : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
 
         if (!stats.IsDead) SwitchState(State.Chasing);
+    }
+
+    //Called when the enemy is spawned
+    public void ResetEnemyAI()
+    {
+        if (agent == null) agent = GetComponent<NavMeshAgent>();
+        if (stats == null) stats = GetComponent<EntityStats>();
+
+        StopAllCoroutines();
+        canAttack = true;
+        currentBarrierTarget = null;
+        pathTimer = updateInterval; //Forces path recalculation on spawn
+
+        if (agent != null && agent.isActiveAndEnabled)
+        {
+            agent.ResetPath(); //Clears the route from the "past life"
+            agent.isStopped = false;
+            agent.velocity = Vector3.zero;
+        }
+
+        SwitchState(State.Chasing);
     }
 
     /// <summary>

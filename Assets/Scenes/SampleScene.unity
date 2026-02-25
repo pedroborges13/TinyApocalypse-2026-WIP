@@ -5706,6 +5706,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Normal
       objectReference: {fileID: 0}
+    - target: {fileID: 8629934455430690940, guid: a3b70ef802257cd4bbfdab4bd07c56df, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8900450535622244439, guid: a3b70ef802257cd4bbfdab4bd07c56df, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.1569195
@@ -6345,6 +6349,10 @@ PrefabInstance:
     - target: {fileID: 3049772925391692518, guid: 73545ea0aa4a3604b89368b8a10c6954, type: 3}
       propertyPath: m_Name
       value: Runner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3049772925391692518, guid: 73545ea0aa4a3604b89368b8a10c6954, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3094069237285164158, guid: 73545ea0aa4a3604b89368b8a10c6954, type: 3}
       propertyPath: m_Size.x
@@ -8427,10 +8435,10 @@ SceneRoots:
   - {fileID: 1383565644}
   - {fileID: 1973817663}
   - {fileID: 6361934791234782621}
-  - {fileID: 1465697766}
-  - {fileID: 449181533}
   - {fileID: 303686115}
   - {fileID: 3470141013310567460}
+  - {fileID: 449181533}
+  - {fileID: 1465697766}
   - {fileID: 1314720373}
   - {fileID: 1372507448}
   - {fileID: 1202319796}

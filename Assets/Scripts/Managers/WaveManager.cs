@@ -173,6 +173,7 @@ public class WaveManager : MonoBehaviour
     //Responsible for instantiating and configuring enemies
     void SpawnEnemy(GameObject prefab, int pointIndex)
     {
+        //----- POOL SETTINGS ------
         if (prefab == null) return; 
 
         IObjectPool<GameObject> selectedPool = null;    
@@ -182,11 +183,15 @@ public class WaveManager : MonoBehaviour
 
         if (selectedPool == null) return;
 
+        //----- ENEMY SETTINGS -----
         GameObject enemy = selectedPool.Get();
         var agent = enemy.GetComponent<NavMeshAgent>();
-        agent.enabled = true;
-        agent.isStopped = false;
+        var stats = enemy.GetComponent<EntityStats>();
+        var ai = enemy.GetComponent<EnemyAI>();
 
+        if (agent != null) agent.enabled = false; //Disables the agent to teleport without errors
+
+        //----- SPAWN POSITION -----
         Transform selectedPoint = spawnPoints[pointIndex];
         Vector3 randomOffset = new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)); //Small position variation to prevent them from spawning too close together
         float yOffset = 0.5f;
@@ -195,11 +200,17 @@ public class WaveManager : MonoBehaviour
         enemy.transform.position = spawnPos;
         enemy.transform.rotation = Quaternion.identity;
 
-        //Apply difficulty buffs via EntityStats and Reset stats
-        if (enemy.TryGetComponent<EntityStats>(out EntityStats stats)) //TryGetComponent performs a single operation (better performance than GetComponent + null check)
+        //----- DIFFICULTY SETTINGS AND RESET -----
+        if (agent != null)
+        {
+            agent.enabled = true; //Reactivate after teleport
+            agent.Warp(spawnPos); //Attaches/positions the enemy on the NavMesh
+        }
+        if (ai != null) ai.ResetEnemyAI();
+        if (stats != null)
         {
             stats.SetupEnemyStats(hpMod, speedMod); //Accesses EntityStats public method
-            //Debug.Log($"HP {stats.MaxHp}, Speed {stats.MoveSpeed}");
+            Debug.Log($"HP {stats.MaxHp}, Speed {stats.MoveSpeed}");
         }
     }
 

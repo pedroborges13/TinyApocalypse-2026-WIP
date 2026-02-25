@@ -58,6 +58,8 @@ public class Weapon : MonoBehaviour
     }
     public void OnEquip()
     {   
+        Cursor.visible = true;
+
         gameObject.SetActive(true);
         isReloading = false;
 

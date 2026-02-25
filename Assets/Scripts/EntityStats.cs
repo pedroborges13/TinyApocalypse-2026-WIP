@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
@@ -48,17 +49,24 @@ public class EntityStats : MonoBehaviour
     }
     public void SetupEnemyStats(float hpMod, float speedMod)
     {
+        IsDead = false;
+
         maxHp = data.MaxHp * hpMod;
         moveSpeed = data.MoveSpeed * speedMod;
 
-        //Novo calculo de vida atual
+        //New current health calculation
         CurrentHp = maxHp;
 
-        //Atualiza NavMeshAgent
+        //Updates NavMeshAgent
         if(TryGetComponent<NavMeshAgent>(out NavMeshAgent agent))
         {
             agent.speed = moveSpeed;
         }
+        if (TryGetComponent<BoxCollider>(out BoxCollider collider))
+        {
+            collider.enabled = true;
+        }
+
     }
     public void TakeDamage(float damage, Vector3 initialPosition = default, float kbForce = 0) //Default and 0 for when the player takes damage
     {
@@ -111,6 +119,13 @@ public class EntityStats : MonoBehaviour
     {
         IsDead = true;
         if (CompareTag("Player")) playerController.enabled = false;
+        else if (CompareTag("Enemy")) StartCoroutine(DeathRoutine());
+    }
+
+    IEnumerator DeathRoutine()
+    {
+        yield return new WaitForSeconds(1.5f);
+
         if (TryGetComponent<PooledEnemy>(out PooledEnemy pooledEnemy))
         {
             pooledEnemy.ReturnToPool();

@@ -76,7 +76,6 @@ public class UIManager : MonoBehaviour
         {
             preparationUI.SetActive(false);
         }
-
     }
 
     void UpdateGameStatusUI(GameStatus newStatus)
