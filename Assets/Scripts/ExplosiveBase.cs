@@ -15,7 +15,7 @@ public abstract class ExplosiveBase : MonoBehaviour
         if (hasExploded) return;
         hasExploded = true;
 
-        GameObject vfx = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        GameObject vfx = VFXManager.Instance.GetExplosionVFX(transform.position);
         vfx.GetComponent<Explosion>().Setup(radius, damage, knockback);
 
         Destroy(gameObject);

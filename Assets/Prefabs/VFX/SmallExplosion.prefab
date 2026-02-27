@@ -9743,6 +9743,7 @@ GameObject:
   - component: {fileID: 198656289721292014}
   - component: {fileID: 199514137936353666}
   - component: {fileID: 1559935321405277326}
+  - component: {fileID: -7050090091230463540}
   m_Layer: 0
   m_Name: SmallExplosion
   m_TagString: Untagged
@@ -14684,6 +14685,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 136
   vfxDuration: 1
+--- !u!114 &-7050090091230463540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828176872806910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c7611d8cfa79041b615acd5a7df598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledVFX
+  duration: 1
 --- !u!1 &1834016579923706
 GameObject:
   m_ObjectHideFlags: 0

@@ -5109,7 +5109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1202319796
 Transform:
   m_ObjectHideFlags: 0
@@ -6521,6 +6521,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4488224487903296319, guid: 5937b83973af10b48abaff1408b64b80, type: 3}
   m_PrefabInstance: {fileID: 859815901}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1563998961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563998963}
+  - component: {fileID: 1563998962}
+  m_Layer: 0
+  m_Name: VFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1563998962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563998961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc31b7f8bf488f240b179d817f380b54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VFXManager
+  bloodPrefab: {fileID: 519265189813625459, guid: de19c1b5789228d4cadc5ae6b337ae0b, type: 3}
+  explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+--- !u!4 &1563998963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563998961}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.67557, y: 0.5, z: 2.22642}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584001471
 GameObject:
   m_ObjectHideFlags: 0
@@ -8426,6 +8472,7 @@ SceneRoots:
   - {fileID: 731720178}
   - {fileID: 1682039876}
   - {fileID: 978746798}
+  - {fileID: 1563998963}
   - {fileID: 1339104438}
   - {fileID: 1465220760}
   - {fileID: 540483755}

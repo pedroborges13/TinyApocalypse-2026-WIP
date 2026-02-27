@@ -21,7 +21,7 @@ public class Projectile : MonoBehaviour
     private float speed;
     private int currentPierce;
 
-    private IObjectPool<Projectile> pool;
+    private IObjectPool<Projectile> projPool;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class Projectile : MonoBehaviour
 
     public void SetPool(IObjectPool<Projectile> pool)
     {
-        this.pool = pool;
+        projPool = pool;
     }
 
     public void Setup(WeaponData data)
@@ -75,9 +75,9 @@ public class Projectile : MonoBehaviour
             //VFX
             if (bloodPrefab != null)
             {
-                GameObject newBlood = Instantiate(bloodPrefab, transform.position, Quaternion.LookRotation(hitNormal));
+                GameObject newBlood = VFXManager.Instance.GetBloodVFX(transform.position, Quaternion.LookRotation(hitNormal));
                 newBlood.transform.parent = other.transform;
-                Destroy(newBlood, vfxDuration);
+                //PooledVFX handles "Destroy" (Release) automatically
             }
 
             if (currentPierce <= 0)
@@ -105,18 +105,7 @@ public class Projectile : MonoBehaviour
     void ReturnToPool()
     {
         CancelInvoke(nameof(ReturnToPool)); //Cancels the lifetime timer if it's still running (in case it hit something before the time)
-        if (pool != null) pool.Release(this); //Sends back to the pool
+        if (projPool != null) projPool.Release(this); //Sends back to the pool
         else Destroy(gameObject); //Destroy as fallback when pool unavailable 
     }
-
-    /*void StopProjectileVisually()
-    {
-        rb.linearVelocity = Vector3.zero;
-        if (trail != null) trail.emitting = false;
-
-        MeshRenderer mesh = GetComponent<MeshRenderer>();
-        if (mesh != null) mesh.enabled = false;
-
-        Destroy(gameObject, 0.01f);
-    }*/
 }

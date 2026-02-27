@@ -11,9 +11,6 @@ public class Explosion : MonoBehaviour
     private float maxDamage;
     private float knockbackForce;
 
-    [Header("VFX")]
-    [SerializeField] private float vfxDuration;
-
     //List to avoid multiple damage in object with multiple colliders
     private List<GameObject> objectsDamaged = new List<GameObject>();
 
@@ -24,7 +21,7 @@ public class Explosion : MonoBehaviour
         knockbackForce = newKnockback;
 
         Explode();
-        Destroy(gameObject, vfxDuration);
+       //Destroy(gameObject, 1);
     }
 
     void Explode()

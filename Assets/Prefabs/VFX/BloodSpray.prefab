@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 772703849489030367}
   - component: {fileID: 48650403830067092}
   - component: {fileID: 1554337906644844638}
+  - component: {fileID: -4442611187030734150}
   m_Layer: 0
   m_Name: BloodSpray
   m_TagString: Untagged
@@ -4664,6 +4665,19 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-4442611187030734150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519265189813625459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c7611d8cfa79041b615acd5a7df598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PooledVFX
+  duration: 0.25
 --- !u!1 &2597743341254526484
 GameObject:
   m_ObjectHideFlags: 0
