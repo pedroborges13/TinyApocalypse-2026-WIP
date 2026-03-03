@@ -4,12 +4,17 @@ using UnityEngine;
 public class LightFlicker : MonoBehaviour
 {
     [Header("Intensity Settings")]
-    [SerializeField] private float minIntensity;
-    [SerializeField] private float maxIntensity;
+    [SerializeField] private int minIntensity;
+    [SerializeField] private int maxIntensity;
 
-    [Header("Speed")]
-    [SerializeField] private float minWaitTime;
-    [SerializeField] private float maxWaitTime;
+    [Header("Steady")]
+    [SerializeField] private float minSteadyTime;
+    [SerializeField] private float maxSteadyTime;
+
+    [Header("Flicker Settings")]
+    [SerializeField] private int minFlickerCount;
+    [SerializeField] private int maxFlickerCount;
+    [SerializeField] private float flickerSpeed;
 
     private Light[] lightSources;
 
@@ -30,35 +35,44 @@ public class LightFlicker : MonoBehaviour
     {
         while (true)
         {
-            //Random intensity value for current flicker cycle
-            float targetIntensitySpot = Random.Range(minIntensity, maxIntensity);
+            SetLightIntensity(maxIntensity);
+            float steadyTime = Random.Range(minSteadyTime, maxSteadyTime);
+            yield return new WaitForSeconds(steadyTime);
+
+            int flickers = Random.Range(minFlickerCount, maxFlickerCount);
+
+            for (int i = 0; i < flickers; i++)
+            {
+                int targetIntensitySpot = Random.Range(0, maxIntensity + 1);
+                SetLightIntensity(targetIntensitySpot);
+
+                yield return new WaitForSeconds(flickerSpeed);
+            }
 
             //Chance for the light to turn off completely
             if (Random.value < 0.01f)
             {
-                targetIntensitySpot = 0;
+                SetLightIntensity(0);
+                yield return new WaitForSeconds(2f);
             }
+        }
+    }
 
-            float targetIntensityPoint = targetIntensitySpot / maxIntensity;
+    void SetLightIntensity(int spotIntensity)
+    {
+        float targetIntensityPoint = (float)spotIntensity / 20f;
 
-            //Applies the same intensity for all lights on the lamppost simultaneously
-            foreach (Light light in lightSources)
+        //Applies the same intensity for all lights on the lamppost simultaneously
+        foreach (Light light in lightSources)
+        {
+            if (light.type == LightType.Spot)
             {
-                if (light.type == LightType.Spot)
-                {
-                    light.intensity = targetIntensitySpot;
-                }
-                else if (light.type == LightType.Point)
-                {
-                    light.intensity = targetIntensityPoint;
-                }
+                light.intensity = (float)spotIntensity;
             }
-
-            float waitTime;
-            if (targetIntensitySpot == 0f) waitTime = 5f;
-            else waitTime = Random.Range(minWaitTime, maxWaitTime);
-
-            yield return new WaitForSeconds(waitTime);
+            else if (light.type == LightType.Point)
+            {
+                light.intensity = targetIntensityPoint;
+            }
         }
     }
 }
