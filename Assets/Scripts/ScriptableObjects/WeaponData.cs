@@ -8,6 +8,7 @@ public class WeaponData : ScriptableObject
     [SerializeField] private string weaponName;
     [SerializeField] private GameObject modelPrefab;
     [SerializeField] private GameObject projectilePrefab;
+    [SerializeField] private SoundType fireSound;
 
     [Header("Stats")]
     [SerializeField] private float damage;
@@ -32,6 +33,7 @@ public class WeaponData : ScriptableObject
     public string WeaponName => weaponName;
     public GameObject ModelPrefab => modelPrefab;
     public GameObject ProjectilePrefab => projectilePrefab;
+    public SoundType FireSound => fireSound;
 
     //Stats
     public float Damage => damage;

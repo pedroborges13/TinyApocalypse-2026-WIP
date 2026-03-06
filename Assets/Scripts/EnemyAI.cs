@@ -50,6 +50,8 @@ public class EnemyAI : MonoBehaviour
 
         canAttack = true;
         SwitchState(State.Chasing);
+
+        StartCoroutine(ZombieMoanSFX());
     }
 
     void Update()
@@ -315,6 +317,19 @@ public class EnemyAI : MonoBehaviour
         }
 
         SwitchState(State.Chasing);
+    }
+
+    IEnumerator ZombieMoanSFX()
+    {
+        while (true)
+        {
+            if (Random.value < 0.25f)
+            {
+                AudioManager.Instance.PlaySound(SoundType.ZombieMoan, transform.position);
+            }
+
+            yield return new WaitForSeconds(Random.Range(3f, 7f));
+        }        
     }
 
     /// <summary>

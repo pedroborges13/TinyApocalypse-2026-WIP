@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.Pool;
 using UnityEngine.Rendering;
@@ -6,6 +5,7 @@ using UnityEngine.Rendering;
 public class Projectile : MonoBehaviour
 {
     [Header("Settings")]
+    [SerializeField] private LayerMask hitLayers;
     [SerializeField] private float lifeTime;
     private Rigidbody rb;
     private TrailRenderer trail;
@@ -58,7 +58,7 @@ public class Projectile : MonoBehaviour
 
         float travelDistance = speed * Time.fixedDeltaTime;
         
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, travelDistance))
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, travelDistance, hitLayers))
         {
             transform.position = hit.point; //Moves to the impact point 
             rb.linearVelocity = Vector3.zero;

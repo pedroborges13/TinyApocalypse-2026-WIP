@@ -9,10 +9,17 @@ public class AudioManager : MonoBehaviour
 
     void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
 
-        library.Initialize(); //Prepare the dictionary
+            if (library != null) library.Initialize(); //Prepare the dictionary
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
         DontDestroyOnLoad(gameObject); //Keeps audio playing even during scene transitions
     }
 
@@ -24,13 +31,13 @@ public class AudioManager : MonoBehaviour
         if (effect == null) return;
 
         //Create a temporary GameObject
-        GameObject go = new GameObject("TempAudio" + effect.name);
+        GameObject go = new GameObject("TempAudio");
         go.transform.position = position;   
 
         AudioSource audioSource = go.AddComponent<AudioSource>();
         audioSource.spatialBlend = 1f;
-        audioSource.minDistance = 5f;
-        audioSource.maxDistance = 30f;
+        audioSource.minDistance = 3f;
+        audioSource.maxDistance = 20f;
 
         //Execute the Play logic defined inside the SoundEffectData Scriptable Object
         effect.Play(audioSource);
@@ -39,6 +46,7 @@ public class AudioManager : MonoBehaviour
         //(Fast pitch = shorter sound, Slow pitch = longer sound)
         //float length = audioSource.clip.length / Mathf.Max(0.1f, audioSource.pitch);
 
-        Destroy(go, audioSource.clip.length);
+        if (audioSource.clip != null) Destroy(go, audioSource.clip.length);
+        else Destroy(go);
     }
 }

@@ -7,6 +7,7 @@ public class Landmine : ExplosiveBase
         if (other.CompareTag("Enemy"))
         {
             TriggerExplosion();
+            AudioManager.Instance.PlaySound(SoundType.Landmine, transform.position);
         }
     }
 }

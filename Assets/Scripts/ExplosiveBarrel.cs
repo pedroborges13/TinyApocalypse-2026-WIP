@@ -20,6 +20,11 @@ public class ExplosiveBarrel : ExplosiveBase
 
         currentHp -= damage;
 
-        if(currentHp <= 0) TriggerExplosion();
+        if (currentHp <= 0)
+        {
+            TriggerExplosion();
+            AudioManager.Instance.PlaySound(SoundType.BarrelExplosion, transform.position);
+        }
+
     }
 }

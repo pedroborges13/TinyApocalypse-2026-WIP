@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using Unity.Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 using Random = UnityEngine.Random;
@@ -100,6 +98,9 @@ public class Weapon : MonoBehaviour
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo, weaponData.MagazineSize);
         SpawnMuzzleFlash();
+
+        //Plays the sound defined in this weapon's ScriptableObject
+        AudioManager.Instance.PlaySound(weaponData.FireSound, muzzlePoint.position);
 
         //The animations were shaking the rotation too much, so it was necessary to base it on the player's rotation
         Quaternion playerRotation = transform.root.rotation;

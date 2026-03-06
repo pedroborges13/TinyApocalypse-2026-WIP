@@ -1,11 +1,10 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SoundType { PistolShot, SubmachineShot, ShotgunShot, SniperShot, BarrelExplosion, ZombieMoan }
+public enum SoundType { PistolShot, SubmachineShot, ShotgunShot, SniperShot, BarrelExplosion, ZombieMoan, Landmine, GuitarNoise }
 
 [CreateAssetMenu(fileName = "SoundLibrary", menuName = "Audio/Sound Library")]
-public class SoundLibraryData : MonoBehaviour
+public class SoundLibraryData : ScriptableObject
 {
     [System.Serializable]
     public struct SoundMapping
@@ -36,7 +35,7 @@ public class SoundLibraryData : MonoBehaviour
     public SoundEffectData GetSound(SoundType type)
     {
         //Lazy initialization in case Initialize() wasn't called in Awake
-        if (soundDictionary == null) Initialize();
+        //if (soundDictionary == null) Initialize();
 
         //Tries to get the value.
         //Returns null and logs a warning if the Enum is missing from the list

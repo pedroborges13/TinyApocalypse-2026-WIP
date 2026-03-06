@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
         OnGamePhaseChanged?.Invoke(CurrentPhase);
         //Debug.Log($"GameState: {CurrentPhase}");
         prepTime = defaultPrepTime;
+        
+        //SFX
+        AudioManager.Instance.PlaySound(SoundType.GuitarNoise, transform.position);
     }
 
     public void TogglePause()

@@ -15,6 +15,7 @@ MonoBehaviour:
   weaponName: SMG
   modelPrefab: {fileID: 0}
   projectilePrefab: {fileID: 3917754564542185514, guid: 96119a04a9f1d9446bd717767a64bb8f, type: 3}
+  fireSound: 1
   damage: 1
   fireRateRPM: 900
   knockbackForce: 1
