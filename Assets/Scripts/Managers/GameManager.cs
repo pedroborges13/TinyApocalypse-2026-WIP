@@ -93,6 +93,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         OnGameStatusChanged?.Invoke(CurrentStatus);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     private void OnDisable()
     {
         if (WaveManager.Instance != null)

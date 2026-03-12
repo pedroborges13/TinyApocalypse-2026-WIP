@@ -4,7 +4,7 @@ using UnityEngine.Pool;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager Instance;
+    public static AudioManager Instance { get; private set; }
 
     [Header("References")]
     [SerializeField] private SoundLibraryData library;

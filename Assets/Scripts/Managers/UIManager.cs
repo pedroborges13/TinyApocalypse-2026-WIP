@@ -5,12 +5,18 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager Instance { get; private set; }
+
     [Header("UI elements")]
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI moneyText;
     [SerializeField] private GameObject preparationUI;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject shopScreen;
+    [SerializeField] private GameObject shopButton;
+    [SerializeField] private GameObject startWaveButton;
 
     [Header("Weapon HUD")]
     [SerializeField] private TextMeshProUGUI weaponNameText;
@@ -19,6 +25,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image reloadFillImage;
     private Coroutine currentReloadCoroutine; //Stores reference to the active coroutine
 
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     void OnEnable()
     {
@@ -94,6 +105,32 @@ public class UIManager : MonoBehaviour
             pauseScreen.SetActive(false);
             gameOverScreen.SetActive(false);
         }
+    }
+
+    public void OptionsButton()
+    {
+        pauseScreen.SetActive(false);
+        optionsScreen.SetActive(true);
+    }
+
+    public void CloseButton()
+    {
+        pauseScreen.SetActive(true);
+        optionsScreen.SetActive(false);
+    }
+
+    public void OpenShopUI()
+    {
+        shopScreen.SetActive(true);
+        shopButton.SetActive(false);
+        startWaveButton.SetActive(false);
+    }
+
+    public void CloseShopUI()
+    {
+        shopScreen.SetActive(false);
+        shopButton.SetActive(true);
+        startWaveButton.SetActive(true);
     }
 
     // ----- WEAPON HUD -----
