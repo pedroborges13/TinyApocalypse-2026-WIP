@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,18 +14,33 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject preparationUI;
     [SerializeField] private GameObject pauseScreen;
     [SerializeField] private GameObject optionsScreen;
-    [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject shopScreen;
     [SerializeField] private GameObject shopButton;
     [SerializeField] private GameObject startWaveButton;
 
     [Header("Weapon HUD")]
+    [SerializeField] private GameObject weaponHUD;
     [SerializeField] private TextMeshProUGUI weaponNameText;
     [SerializeField] private TextMeshProUGUI ammoText;
     [SerializeField] private GameObject reloadHUD;
     [SerializeField] private Image reloadFillImage;
     private Coroutine currentReloadCoroutine; //Stores reference to the active coroutine
 
+    [Header("Weapon Icons")]
+    [SerializeField] private GameObject pistolIcon;
+    [SerializeField] private GameObject submachineIcon;
+    [SerializeField] private GameObject shotgunIcon;
+    [SerializeField] private GameObject sniperIcon;
+
+    [Header("GameOver")]
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private Image background;
+    [SerializeField] private TextMeshProUGUI gameOverText;
+    [SerializeField] private GameObject restartButton;
+    [SerializeField] private GameObject menuButton;
+
+    //References
+    [SerializeField] private EntityStats stats;
     void Awake()
     {
         if (Instance == null) Instance = this;
@@ -40,6 +56,8 @@ public class UIManager : MonoBehaviour
         Weapon.OnReloadStart += StartReloadVisual;
 
         if (GameManager.Instance != null) SubscribeToGameManager();
+
+        if (stats != null) stats.OnPlayerDeath += StartGameOverScreen;
     }
 
     void Start()
@@ -73,7 +91,7 @@ public class UIManager : MonoBehaviour
 
     void UpdateMoneyText(int currentMoney)
     {
-        moneyText.text = "$: " + currentMoney.ToString();
+        moneyText.text = currentMoney.ToString();
     }
 
     void UpdateGamePhaseUI(GamePhase newPhase)
@@ -133,6 +151,71 @@ public class UIManager : MonoBehaviour
         startWaveButton.SetActive(true);
     }
 
+    void StartGameOverScreen()
+    {
+        StartCoroutine(GameOverAnimation());
+        Debug.Log("Start GameOver animation");
+    }
+
+    IEnumerator GameOverAnimation()
+    {
+        gameOverScreen.SetActive(true);
+        gameOverText.gameObject.SetActive(false);
+        restartButton.SetActive(false);
+        menuButton.SetActive(false);
+
+        preparationUI.SetActive(false);
+        waveText.text = "";
+        weaponHUD.SetActive(false); 
+
+        Color tempColor = background.color;
+        tempColor.a = 0;
+        background.color = tempColor;
+
+        float duration = 2f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+
+            //Calculates time percentage (normalised from 0 to 1)
+            float progress = timer/duration;
+
+            tempColor.a = Mathf.Lerp(0f, 1f, progress);
+            background.color = tempColor;
+
+            yield return null;  
+        }
+
+        //Ensures it ends up 100% opaque
+        tempColor.a = 1f;
+        background.color = tempColor;
+
+        gameOverText.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        restartButton.SetActive(true);
+        menuButton.SetActive(true);
+
+        //Small animation for the button
+        restartButton.transform.localScale = Vector3.zero;
+        menuButton.transform.localScale = Vector3.zero;
+
+        float buttonTimer = 0;
+        while (buttonTimer < 0.4)
+        {
+            buttonTimer += Time.deltaTime;
+            restartButton.transform.localScale = Vector3.one * (buttonTimer / 0.4f);
+            menuButton.transform.localScale = Vector3.one * (buttonTimer / 0.4f);
+            yield return null;
+        }
+        restartButton.transform.localScale = Vector3.one;
+        menuButton.transform.localScale = Vector3.one;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     // ----- WEAPON HUD -----
     void UpdateWeaponName(string name)
     {
@@ -148,6 +231,40 @@ public class UIManager : MonoBehaviour
         //Reset reload visuals when switching weapons
         if (reloadHUD != null) reloadHUD.SetActive(false);
         reloadFillImage.fillAmount = 0;
+
+        UpdateWeaponIcon(name);
+    }
+
+    void UpdateWeaponIcon(string name)
+    {
+        if (name == "Pistol")
+        {
+            pistolIcon.SetActive(true);
+            submachineIcon.SetActive(false);
+            shotgunIcon.SetActive(false);
+            sniperIcon.SetActive(false);
+        }
+        else if (name == "SMG")
+        {
+            pistolIcon.SetActive(false);
+            submachineIcon.SetActive(true);
+            shotgunIcon.SetActive(false);
+            sniperIcon.SetActive(false);
+        }
+        else if (name == "Shotgun")
+        {
+            pistolIcon.SetActive(false);
+            submachineIcon.SetActive(false);
+            shotgunIcon.SetActive(true);
+            sniperIcon.SetActive(false);
+        }
+        else if (name == "Sniper")
+        {
+            pistolIcon.SetActive(false);
+            submachineIcon.SetActive(false);
+            shotgunIcon.SetActive(false);
+            sniperIcon.SetActive(true);
+        }
     }
 
     void UpdateAmmoText(int current, int max)
@@ -215,7 +332,10 @@ public class UIManager : MonoBehaviour
             GameManager.Instance.OnGamePhaseChanged -= UpdateGamePhaseUI;
             GameManager.Instance.OnGameStatusChanged -= UpdateGameStatusUI;
         }
+
         PlayerWallet.OnMoneyChanged -= UpdateMoneyText;
+
+        if (stats != null) stats.OnPlayerDeath -= StartGameOverScreen;
     }
 }
  

@@ -28,6 +28,7 @@ public class EntityStats : MonoBehaviour
 
     //Events
     public event Action OnHealthChanged;
+    public event Action OnPlayerDeath;
 
 
     void Awake()
@@ -87,20 +88,24 @@ public class EntityStats : MonoBehaviour
         {
            anim.PlayDeath();
 
-           if (CompareTag("Enemy"))
-           {
-               GlobalEvents.OnEnemyKilled?.Invoke();
-               DisableNavMesh();
+            if (CompareTag("Enemy"))
+            {
+                GlobalEvents.OnEnemyKilled?.Invoke();
+                DisableNavMesh();
 
-               if (TryGetComponent<EnemyDrop>(out EnemyDrop drop))
-               {
-                   drop.DropReward();
-               }   
-               if (TryGetComponent<BoxCollider>(out BoxCollider collider))
-               {
+                if (TryGetComponent<EnemyDrop>(out EnemyDrop drop))
+                {
+                    drop.DropReward();
+                }
+                if (TryGetComponent<BoxCollider>(out BoxCollider collider))
+                {
                     collider.enabled = false;
-               }
-           }
+                }
+            }
+            else if (CompareTag("Player"))
+            {
+                OnPlayerDeath?.Invoke();
+            }
            Death();
          }
     }

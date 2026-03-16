@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public enum GamePhase { Preparation, Combat }
 public enum GameStatus { Playing, Paused, GameOver }
 public class GameManager : MonoBehaviour
@@ -92,6 +93,16 @@ public class GameManager : MonoBehaviour
         CurrentStatus = GameStatus.Playing;
         Time.timeScale = 1;
         OnGameStatusChanged?.Invoke(CurrentStatus);
+    }
+
+    public void RestartGame() 
+    {
+        SceneManager.LoadScene("Gameplay");
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
