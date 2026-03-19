@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Pool;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
+
+    [SerializeField] AudioMixer mixer;
 
     [Header("References")]
     [SerializeField] private SoundLibraryData library;
@@ -22,16 +25,22 @@ public class AudioManager : MonoBehaviour
             Instance = this;
 
             if (library != null) library.Initialize(); //Prepare the dictionary
+
+            DontDestroyOnLoad(gameObject); //Keeps audio playing even during scene transitions
         }
         else
         {
+            //AudioManager is required in the "MainMenu" scene, a duplicate exists in "Gameplay" for testing purposes, but it will be destroyed if the game is initialised from the menu
             Destroy(gameObject);
             return;
         }
 
-        DontDestroyOnLoad(gameObject); //Keeps audio playing even during scene transitions
-
         audioPool = new ObjectPool<AudioSource>(CreateAudioSource, GetFromPool, BackToPool, OnDestroyAudioSource, false, defaultPoolSize, maxPoolSize);
+    }
+
+    void Start()
+    {
+        LoadVolume();
     }
 
     public void PlaySound(SoundType type, Vector3 position)
@@ -59,6 +68,43 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    // ----- AudioMixer Settings -----
+    public void SetMusicVolume(float volume)
+    {
+        //Due to the slider art, values range from 0 to 17. Therefore, normalisation is required to avoid affecting the calculation
+        float normalizedVolume = volume / 17;
+
+        float dbValue = Mathf.Log10(Mathf.Max(normalizedVolume, 0.0001f)) * 20; //Mathf.Max prevents the value from hitting absolute zero, which would break the Log10 calculation
+
+        //Updates the exposed parameter in the AudioMixer
+        mixer.SetFloat("MusicVol", dbValue); 
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        //Due to the slider art, values range from 0 to 17. Therefore, normalisation is required to avoid affecting the calculation
+        float normalizedVolume = volume / 17;
+
+        float dbValue = Mathf.Log10(Mathf.Max(normalizedVolume, 0.0001f)) * 20; //Mathf.Max prevents the value from hitting absolute zero, which would break the Log10 calculation
+
+        //Updates the exposed parameter in the AudioMixer
+        mixer.SetFloat("SFXVol", dbValue);
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+    }
+
+    void LoadVolume()
+    {
+        //Retrieves the saved volume values or uses a default value if none is found
+        float music = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        float sfx = PlayerPrefs.GetFloat("SFXVolume", 0.5f);
+
+        //Applies the loaded values to the AudioMixer groups
+        SetMusicVolume(music);
+        SetSFXVolume(sfx);
+    }
+
+    // ----- Pool Settings -----
     private AudioSource CreateAudioSource()
     {
         //Create a temporary GameObject
@@ -97,4 +143,6 @@ public class AudioManager : MonoBehaviour
 
         audioPool.Release(audioSource); 
     }
+    //-------------------
+
 }

@@ -971,6 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841949432}
   - component: {fileID: 841949431}
+  - component: {fileID: 841949433}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -1008,6 +1009,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &841949433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841949430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06eb47a1a85384e47b3e56c0b57dbb20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VolumeUI
+  musicSlider: {fileID: 1332963641}
+  sfxSlider: {fileID: 3360623521133976202}
 --- !u!1 &896118301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,7 +1861,7 @@ GameObject:
   - component: {fileID: 1332963640}
   - component: {fileID: 1332963641}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: MusicSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2247,6 +2262,64 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554976563}
   m_CullTransparentMesh: 1
+--- !u!1001 &1681751995
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 963.1008
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 759.8071
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 95980747803971241, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466308717075573580, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8990522292821040595, guid: f67064511da98784fa820a34fb26ef58, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f67064511da98784fa820a34fb26ef58, type: 3}
 --- !u!1 &1701127138
 GameObject:
   m_ObjectHideFlags: 0
@@ -4313,7 +4386,7 @@ GameObject:
   - component: {fileID: 2718528523158187478}
   - component: {fileID: 3360623521133976202}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: SFXSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5098,5 +5171,6 @@ SceneRoots:
   - {fileID: 2141502986}
   - {fileID: 835928848}
   - {fileID: 310807131}
+  - {fileID: 1681751995}
   - {fileID: 841949432}
   - {fileID: 1262552397}
