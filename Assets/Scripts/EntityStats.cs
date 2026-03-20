@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering;
+using Unity.Cinemachine;
 
 public class EntityStats : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class EntityStats : MonoBehaviour
     [SerializeField] private EntityStatsData data;
 
     //References
+    [SerializeField] private CameraAnimationShake cameraAnimation;
     private CharacterAnimationController anim;
     private NavMeshAgent agent;
     private CharacterController playerController;
@@ -20,6 +22,9 @@ public class EntityStats : MonoBehaviour
 
     public float CurrentHp {  get; private set; }
     public bool IsDead { get; private set; }
+    private bool CanRegenerate;
+    private bool isPlayer;
+    private Coroutine regenerationTimer;
 
     //Getters
     public float MaxHp => maxHp;
@@ -47,7 +52,27 @@ public class EntityStats : MonoBehaviour
         anim = GetComponent<CharacterAnimationController>();
         if (CompareTag("Enemy")) agent = GetComponent<NavMeshAgent>();
         else if (CompareTag("Player")) playerController = GetComponent<CharacterController>();
+
+        CanRegenerate = true;
+        isPlayer = CompareTag("Player");
     }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space ) && cameraAnimation != null)
+        {
+            cameraAnimation.PlayShake();
+        }
+
+        if (IsDead || !isPlayer) return; 
+
+        if (CanRegenerate && CurrentHp < MaxHp)
+        {
+            CurrentHp += 0.75f * Time.deltaTime;
+            CurrentHp = Mathf.Min(CurrentHp, MaxHp);
+        }
+    }
+
     public void SetupEnemyStats(float hpMod, float speedMod)
     {
         IsDead = false;
@@ -82,7 +107,18 @@ public class EntityStats : MonoBehaviour
 
         if (CurrentHp > 0 && canReceiveKnockback) anim.PlayHit();
 
-        if (CompareTag("Player")) OnHealthChanged?.Invoke(); //Notifies the UIManager
+        if (CompareTag("Player")) 
+        {
+            if (regenerationTimer != null) StopCoroutine(regenerationTimer);
+
+            regenerationTimer = StartCoroutine(HealthRegenerationRoutine());
+
+            if (cameraAnimation != null)
+            {
+               cameraAnimation.PlayShake();
+            }
+        }
+
 
         if (CurrentHp <= 0)
         {
@@ -110,6 +146,15 @@ public class EntityStats : MonoBehaviour
          }
     }
 
+    IEnumerator HealthRegenerationRoutine()
+    {
+        CanRegenerate = false;
+
+        yield return new WaitForSeconds(3f);
+
+        CanRegenerate = true;
+    }
+
     void DisableNavMesh()
     {
         if(agent != null)
@@ -123,6 +168,7 @@ public class EntityStats : MonoBehaviour
     void Death()
     {
         IsDead = true;
+        CanRegenerate = false;
         if (CompareTag("Player")) playerController.enabled = false;
         else if (CompareTag("Enemy")) StartCoroutine(DeathRoutine());
     }

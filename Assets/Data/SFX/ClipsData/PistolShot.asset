@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SoundEffectData
   mixerGroup: {fileID: -4583777783931124834, guid: 780faf567a3124a4989f9bb9b523e0ca, type: 2}
   clips:
-  - {fileID: 8300000, guid: 714016ba16ac5a14881e84987fb1db2c, type: 3}
+  - {fileID: 8300000, guid: 32bf1f73efd99a7459ad42d49cb86e89, type: 3}
   volume: 0.7
   pitchMin: 0.9
   pitchMax: 1.1

@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stats.IsDead) return;
+
         PlayerMove();
         PlayerRotation();
         PlayerShootingInput();  
