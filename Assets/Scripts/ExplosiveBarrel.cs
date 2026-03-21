@@ -14,6 +14,12 @@ public class ExplosiveBarrel : ExplosiveBase
     {
         currentHp = MaxHp;
     }
+
+    protected override GameObject GetVisualEffect()
+    {
+        return VFXManager.Instance.GetBigExplosion(transform.position);
+    }
+
     public void TakeDamage(float damage)
     {
         if (hasExploded) return;

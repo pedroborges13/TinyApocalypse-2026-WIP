@@ -21,7 +21,6 @@ public class Explosion : MonoBehaviour
         knockbackForce = newKnockback;
 
         Explode();
-       //Destroy(gameObject, 1);
     }
 
     void Explode()

@@ -58,8 +58,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.7871041, y: 1.8582246, z: 0.6292932}
-  m_Center: {x: 0.0071421266, y: 1.740318, z: 0}
+  m_Size: {x: 0.90512514, y: 1.8327198, z: 0.79087913}
+  m_Center: {x: -0.00838685, y: 1.0008042, z: -0.18785554}
 --- !u!195 &1540475158242060737
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d03bd536294b37240b52ed70ad9d150d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  currentState: 0
   attackRange: 1.4
   attackCooldown: 2
   isBoss: 1
@@ -111,8 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90778df99c38e5b458d2f4e2a99cb5de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityStats
-  isBoss: 1
+  canReceiveKnockback: 0
   data: {fileID: 11400000, guid: aa05b40e58cfbb54a80a64e82bf203f4, type: 2}
+  cameraAnimation: {fileID: 0}
 --- !u!114 &4473789408933331697
 MonoBehaviour:
   m_ObjectHideFlags: 0

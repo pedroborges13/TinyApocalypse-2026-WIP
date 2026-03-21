@@ -165,7 +165,7 @@ public class EntityStats : MonoBehaviour
         }
     }
 
-    void Death()
+    public void Death()
     {
         IsDead = true;
         CanRegenerate = false;
