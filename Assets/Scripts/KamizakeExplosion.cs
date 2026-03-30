@@ -39,6 +39,7 @@ public class KamizakeExplosion : ExplosiveBase
             if (agent != null && agent.enabled) agent.isStopped = true;
 
             TriggerExplosion();
+            GlobalEvents.OnEnemyKilled?.Invoke();
             stats.Death();
         }
     }

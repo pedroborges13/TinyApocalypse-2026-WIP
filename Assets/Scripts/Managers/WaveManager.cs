@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Pool;
+using UnityEngine.Rendering;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -11,6 +12,7 @@ public class EnemyDatabase
 {
     public GameObject normalPrefab;
     public GameObject runnerPrefab;
+    public GameObject kamikazePrefab;
     public GameObject bossPrefab;
 }
 public class WaveManager : MonoBehaviour
@@ -30,6 +32,12 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float runnerChanceIncrease;
     [SerializeField] private int runnerIncreaseInterval;
 
+    [Header("Kamikaze Progression")]
+    [SerializeField] private float initialKamikazeChance;
+    [SerializeField] private float kamikazeChanceIncrease;
+    [SerializeField] private int kamikazeIncreaseInterval;
+    [SerializeField] private float maxKamikazeChance;
+
     //Control
     private float hpMod = 1f;
     private float speedMod = 1f;
@@ -39,6 +47,7 @@ public class WaveManager : MonoBehaviour
     //Pools (Separate for each enemy type)
     private IObjectPool<GameObject> normalPool;
     private IObjectPool<GameObject> runnerPool;
+    private IObjectPool<GameObject> kamikazePool;
     private IObjectPool<GameObject> bossPool;
 
 
@@ -53,6 +62,7 @@ public class WaveManager : MonoBehaviour
 
         normalPool = CreateEnemyPool(database.normalPrefab);
         runnerPool = CreateEnemyPool(database.runnerPrefab);
+        kamikazePool = CreateEnemyPool(database.kamikazePrefab);
         bossPool = CreateEnemyPool(database.bossPrefab);
     }
     
@@ -117,7 +127,24 @@ public class WaveManager : MonoBehaviour
 
         //Ensures the chance is never less than 0 or bigger than 1 (100%)
         currentRunnerChance = Mathf.Clamp01(currentRunnerChance);
-        Debug.Log($"Wave {waveNumber}: Runner chance is: {currentRunnerChance * 100}%");
+
+        // ----- KAMIKAZE ENEMY SPAWN LOGIC -----
+        //Kamikaze enemy spawn chance
+        float currentKamikazeChance = initialKamikazeChance;
+
+        if (waveNumber > 1)
+        {
+            //Counts how many full 2-round cycles have passed
+            int increases = (waveNumber - 1) / kamikazeIncreaseInterval;
+
+            //Apply the increase
+            currentKamikazeChance += (increases * kamikazeChanceIncrease);
+        }
+
+        //Ensures the chance is never more than 0.2 (20% (maxKamikazeChance)
+        currentKamikazeChance = Mathf.Min(currentKamikazeChance, maxKamikazeChance);
+
+        Debug.Log($"Wave {waveNumber}: Runner chance is: {currentRunnerChance * 100}% | Kamikaze chance is {currentKamikazeChance * 100}%");
 
         // ----- TOTAL CALCULATION -----
         //Calculate total enemies for the wave
@@ -129,11 +156,11 @@ public class WaveManager : MonoBehaviour
         Debug.Log($"Starting Wave {waveNumber}: {totalEnemies} total enemies.");
         OnWaveStarted?.Invoke();
 
-        StartCoroutine(SpawnProceduralRoutine(totalGroups, enemiesPerGroup, currentRunnerChance, waveNumber));
+        StartCoroutine(SpawnProceduralRoutine(totalGroups, enemiesPerGroup, currentRunnerChance, currentKamikazeChance, waveNumber));
     }
 
    
-    IEnumerator SpawnProceduralRoutine(int totalGroups, int enemiesPerGroup, float runnerChance, int waveNumber)
+    IEnumerator SpawnProceduralRoutine(int totalGroups, int enemiesPerGroup, float runnerChance, float kamikazeChance, int waveNumber)
     {
         //Loop through all groups
         for (int g = 0; g < totalGroups; g++)
@@ -145,8 +172,11 @@ public class WaveManager : MonoBehaviour
             {
                 GameObject prefabToSpawn;
 
+                float roll = Random.value;
+
                 //Probability logic to choose between normal or runner
-                if (Random.value < runnerChance) prefabToSpawn = database.runnerPrefab;
+                if (roll < kamikazeChance) prefabToSpawn = database.kamikazePrefab;
+                else if (roll < runnerChance + kamikazeChance) prefabToSpawn = database.runnerPrefab;
                 else prefabToSpawn = database.normalPrefab;
 
                 SpawnEnemy(prefabToSpawn, spawnIndex);
@@ -174,6 +204,7 @@ public class WaveManager : MonoBehaviour
         IObjectPool<GameObject> selectedPool = null;    
         if (prefab == database.normalPrefab) selectedPool = normalPool;
         else if (prefab == database.runnerPrefab) selectedPool = runnerPool;
+        else if (prefab == database.kamikazePrefab) selectedPool = kamikazePool;
         else if (prefab ==  database.bossPrefab) selectedPool = bossPool;
 
         if (selectedPool == null) return;
@@ -207,6 +238,8 @@ public class WaveManager : MonoBehaviour
             stats.SetupEnemyStats(hpMod, speedMod); //Accesses EntityStats public method
             Debug.Log($"HP {stats.MaxHp}, Speed {stats.MoveSpeed}");
         }
+        var explosive = enemy.GetComponent<ExplosiveBase>();
+        if (explosive != null) explosive.ResetBool(); //bool hasExploded = false;
     }
 
     void CheckWaveEnded()

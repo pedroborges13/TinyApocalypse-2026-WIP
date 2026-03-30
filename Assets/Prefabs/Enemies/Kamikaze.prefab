@@ -153,6 +153,7 @@ MonoBehaviour:
   canReceiveKnockback: 0
   data: {fileID: 11400000, guid: f5de6199b67cdaf43a2a6062295286ee, type: 2}
   cameraAnimation: {fileID: 0}
+  isKamikaze: 1
 --- !u!114 &2194393696908866282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,7 +192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::KamizakeExplosion
   radius: 2
-  damage: 5
+  damage: 1
   knockback: 1
   explosionDistance: 1.5
 --- !u!54 &243714159996528280

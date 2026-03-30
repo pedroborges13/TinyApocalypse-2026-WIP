@@ -24,6 +24,7 @@ public class EntityStats : MonoBehaviour
     public bool IsDead { get; private set; }
     private bool CanRegenerate;
     private bool isPlayer;
+    [SerializeField] private bool isKamikaze;
     private Coroutine regenerationTimer;
 
     //Getters
@@ -175,7 +176,7 @@ public class EntityStats : MonoBehaviour
 
     IEnumerator DeathRoutine()
     {
-        yield return new WaitForSeconds(1.5f);
+        if (!isKamikaze) yield return new WaitForSeconds(1.5f);
 
         if (TryGetComponent<PooledEnemy>(out PooledEnemy pooledEnemy))
         {
