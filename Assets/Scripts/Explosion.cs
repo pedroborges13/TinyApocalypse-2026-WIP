@@ -16,6 +16,8 @@ public class Explosion : MonoBehaviour
 
     public void Setup(float newRadius, float newDamage, float newKnockback)
     {
+        objectsDamaged.Clear(); //Object pooling requires clearing the list to remove player references from the previous life
+
         radius = newRadius;
         maxDamage = newDamage;  
         knockbackForce = newKnockback;
@@ -65,6 +67,7 @@ public class Explosion : MonoBehaviour
             {
                 barrier.TakeDamage(finalDamage);
             }
+
             if (hit.TryGetComponent<ExplosiveBarrel>(out ExplosiveBarrel otherBarrel))
             {
                 otherBarrel.TriggerExplosion();

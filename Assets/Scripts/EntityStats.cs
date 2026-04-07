@@ -24,7 +24,6 @@ public class EntityStats : MonoBehaviour
     public bool IsDead { get; private set; }
     private bool CanRegenerate;
     private bool isPlayer;
-    [SerializeField] private bool isKamikaze;
     private Coroutine regenerationTimer;
 
     //Getters
@@ -166,22 +165,25 @@ public class EntityStats : MonoBehaviour
         }
     }
 
-    public void Death()
-    {
+    public void Death(bool isInstantDeath = false)
+    { 
+        if (IsDead) return;
+
         IsDead = true;
         CanRegenerate = false;
+
         if (CompareTag("Player")) playerController.enabled = false;
-        else if (CompareTag("Enemy")) StartCoroutine(DeathRoutine());
+        else if (CompareTag("Enemy")) StartCoroutine(DeathRoutine(isInstantDeath));
     }
 
-    IEnumerator DeathRoutine()
+    IEnumerator DeathRoutine(bool isInstantDeath)
     {
-        if (!isKamikaze) yield return new WaitForSeconds(1.5f);
+        if (!isInstantDeath) yield return new WaitForSeconds(1.5f);
 
         if (TryGetComponent<PooledEnemy>(out PooledEnemy pooledEnemy))
         {
             pooledEnemy.ReturnToPool();
         }
-        else Destroy(pooledEnemy, 1);
+        else Destroy(gameObject, 1);
     }
 }

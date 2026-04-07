@@ -30,7 +30,7 @@ public class KamizakeExplosion : ExplosiveBase
 
     void Update()
     {
-        if (playerTransform == null || hasExploded) return;
+        if (playerTransform == null || hasExploded || stats.IsDead) return;
 
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
@@ -40,7 +40,8 @@ public class KamizakeExplosion : ExplosiveBase
 
             TriggerExplosion();
             GlobalEvents.OnEnemyKilled?.Invoke();
-            stats.Death();
+
+            stats.Death(true);
         }
     }
 }

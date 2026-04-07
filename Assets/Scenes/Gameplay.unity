@@ -8838,7 +8838,6 @@ MonoBehaviour:
   canReceiveKnockback: 1
   data: {fileID: 11400000, guid: fb18dd598c2487a4699ebf89808b2c37, type: 2}
   cameraAnimation: {fileID: 683916899}
-  isKamikaze: 0
 --- !u!114 &661780507
 MonoBehaviour:
   m_ObjectHideFlags: 0
