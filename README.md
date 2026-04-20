@@ -1,11 +1,11 @@
-# 3D Top-Down Shooter Defense (Work in Progress)
+# Tiny Apocalypse (Work in Progress)
 This is a personal project currently under development. It is a 3D Top-Down Shooter with Tower Defense mechanics, where players must survive infinite waves of enemies by building defenses and upgrading their arsenal.
 
 Project Started: Late January 2026
 README Last Updated: February 5, 2026
 ---
 ## Game Concept
-The gameplay is divided into two main phases managed by a custom Game State system::
+The gameplay is divided into two main phases managed by a custom Game State system:
 **Preparation Phase**
 - The player can build towers, traps, and obstacles.
 - Weapons and upgrades can be acquired.
