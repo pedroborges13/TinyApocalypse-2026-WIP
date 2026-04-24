@@ -1,8 +1,13 @@
 # Tiny Apocalypse (Work in Progress)
-This is a personal project currently under development. It is a 3D Top-Down Shooter with Tower Defense mechanics, where players must survive infinite waves of enemies by building defenses and upgrading their arsenal.
+Tiny Apocalypse is a personal project currently under development. It is a 3D Top-Down Shooter with Tower Defense mechanics, where players must survive infinite waves of enemies by building defenses and upgrading their arsenal.
 
-Project Started: Late January 2026
-README Last Updated: April 23, 2026
+Project Started: Late January 2026.
+
+README Last Updated: April 24, 2026.
+
+<img width="400" height="170" alt="TinyClip2" src="https://github.com/user-attachments/assets/8f76c554-8c65-4567-9ec7-50cb5fcef456" />
+<img width="400" height="170" alt="TinyClip1" src="https://github.com/user-attachments/assets/ac3a193c-f0b6-4d8e-b09b-0586e5043a5c" />
+
 ---
 ## 🎮 Game Overview
 - Tech Stack: Unity, C#, Github
