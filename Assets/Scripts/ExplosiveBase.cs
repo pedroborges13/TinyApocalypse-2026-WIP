@@ -23,6 +23,8 @@ public abstract class ExplosiveBase : MonoBehaviour
         {
             explosion.Setup(radius, damage, knockback);
         }
+
+        Destroy(gameObject);
     }
 
     public void ResetBool()

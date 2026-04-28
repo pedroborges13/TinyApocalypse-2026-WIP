@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     //Mouse position
     private Vector3 mouseWorldPosition;
 
+    private bool isWaitingForMouseRelease;
+
     //Events
     public static event Action OnShootPressed;
     public static event Action OnWeaponReloaded;
@@ -88,7 +90,18 @@ public class PlayerController : MonoBehaviour
         if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject()) return;
 
         //Doesn't shoot in building mode
-        if (BuildManager.Instance != null && BuildManager.Instance.IsBuildingMode) return;
+        if (BuildManager.Instance != null && BuildManager.Instance.IsBuildingMode)
+        {
+            isWaitingForMouseRelease = true; //Automatic weapons
+            return;
+        }
+
+        if (isWaitingForMouseRelease) 
+        {
+            if (!Input.GetMouseButton(0)) isWaitingForMouseRelease = false;
+
+            return;
+        }
 
         Weapon activeWeapon = inventory.GetCurrentWeapon();
         if (activeWeapon == null) return;

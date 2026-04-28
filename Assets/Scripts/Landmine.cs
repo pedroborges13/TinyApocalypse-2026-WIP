@@ -11,6 +11,8 @@ public class Landmine : ExplosiveBase
     {
         if (other.CompareTag("Enemy"))
         {
+            if (hasExploded == true) return;
+
             TriggerExplosion();
             AudioManager.Instance.PlaySound(SoundType.Landmine, transform.position);
         }

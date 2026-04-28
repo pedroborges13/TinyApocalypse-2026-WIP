@@ -30,6 +30,8 @@ public class ExplosiveBarrel : ExplosiveBase
         {
             TriggerExplosion();
             AudioManager.Instance.PlaySound(SoundType.BarrelExplosion, transform.position);
+
+            //Destroy(gameObject);
         }
 
     }
