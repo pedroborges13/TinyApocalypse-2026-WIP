@@ -8,6 +8,11 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
 
+    void Update()
+    {
+        EscButton();
+    }
+
     public void StartButton()
     {
         SceneManager.LoadScene("Gameplay");
@@ -32,6 +37,18 @@ public class MenuController : MonoBehaviour
         menuScreen.SetActive(true);
         optionsScreen.SetActive(false);
         creditsScreen.SetActive(false);
+        Debug.Log("Close button");
+    }
+
+    public void EscButton()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            menuScreen.SetActive(true);
+            optionsScreen.SetActive(false);
+            creditsScreen.SetActive(false);
+            Debug.Log("Esc button");
+        }
     }
 
     public void QuitGame()

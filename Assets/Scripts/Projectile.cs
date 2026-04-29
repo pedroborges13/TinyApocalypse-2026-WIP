@@ -42,11 +42,20 @@ public class Projectile : MonoBehaviour
         currentPierce = data.PierceCount;
         speed = data.ProjectileSpeed;
 
-        //Resets visual and physical state for Pooling
-        rb.linearVelocity = transform.forward * data.ProjectileSpeed;
-
         if (meshRenderer != null) meshRenderer.enabled = true; //Ensures it is visible
         if (trail != null) trail.Clear(); //Clears old trail and avoid drawing lines when teleporting
+
+
+        //Raycast to check if the bullet is spawning inside the barrier (hence the * 0.5, the check starts slightly behind)
+        if (Physics.Raycast(transform.position - transform.forward * 0.65f, transform.forward, out RaycastHit hit, 0.75f, hitLayers))
+        {
+            transform.position = hit.point;
+            ProcessCollision(hit.collider, hit.normal);
+            return;
+        }
+
+        //Resets visual and physical state for Pooling
+        rb.linearVelocity = transform.forward * data.ProjectileSpeed;
 
         CancelInvoke(nameof(ReturnToPool)); //Cancels previous Invokes to avoid bugs
         Invoke(nameof(ReturnToPool), lifeTime);

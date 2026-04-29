@@ -191,6 +191,21 @@ public class BuildManager : MonoBehaviour
         // Desenha a caixa sólida por dentro
         Gizmos.color = new Color(0, 1, 1, 0.2f);
         Gizmos.DrawCube(checkCenter, halfExtents * 2);
+
+        //Grid
+        Gizmos.color = new Color(1, 1, 1, 0.2f);
+        float range = 10f; // Quantos quadrados desenhar ao redor
+
+        Vector3 center = (ghostObject != null) ? ghostObject.transform.position : Vector3.zero;
+
+        for (float x = -range; x <= range; x += gridSize)
+        {
+            for (float z = -range; z <= range; z += gridSize)
+            {
+                Vector3 pos = new Vector3(Mathf.Round(center.x + x), 0, Mathf.Round(center.z + z));
+                Gizmos.DrawWireCube(pos, new Vector3(gridSize, 0.01f, gridSize));
+            }
+        }
     }
 
     void OnDestroy()
