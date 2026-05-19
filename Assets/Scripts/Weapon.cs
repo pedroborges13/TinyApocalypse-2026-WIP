@@ -130,7 +130,7 @@ public class Weapon : MonoBehaviour
 
     void Reload()
     {
-        if (currentAmmo >= weaponData.MagazineSize) return;
+        if (isReloading || currentAmmo >= weaponData.MagazineSize) return;
 
         StartCoroutine(ReloadRoutine());
     }

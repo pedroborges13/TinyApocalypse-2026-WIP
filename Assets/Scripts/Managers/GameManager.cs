@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     private float prepTime;
     private int currentWave;
 
+    //Properties for Statiscs
+    public int CurrentWave => currentWave;
+    public int TotalEliminations { get; private set; }
+    public int TotalPoints { get; private set; }    
+
     //Events
     public event Action <GamePhase> OnGamePhaseChanged;
     public event Action <GameStatus> OnGameStatusChanged;
@@ -24,7 +29,11 @@ public class GameManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void OnEnable()
+    {
+        GlobalEvents.OnEnemyKilled += HandleEnemyKilled;
+    }
+
     void Start()
     {
         prepTime = defaultPrepTime;
@@ -38,7 +47,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (CurrentStatus != GameStatus.Playing) return;
@@ -109,6 +117,15 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    //Statistics
+    void HandleEnemyKilled() => TotalEliminations++;
+
+    public void AddTotalPoints(int amount)
+    {
+        if (amount > 0) TotalPoints += amount;
+    } 
+
 
     private void OnDisable()
     {

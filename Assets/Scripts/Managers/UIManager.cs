@@ -33,11 +33,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject sniperIcon;
 
     [Header("GameOver")]
-    [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private Image background;
-    [SerializeField] private TextMeshProUGUI gameOverText;
+    [SerializeField] private GameObject gameOverScreen;
     [SerializeField] private GameObject restartButton;
     [SerializeField] private GameObject menuButton;
+    [SerializeField] private GameObject statisticsBackground;
+    [SerializeField] private TextMeshProUGUI gameOverText;
+    [SerializeField] private TextMeshProUGUI finalWavesText;
+    [SerializeField] private TextMeshProUGUI pointsText;
+    [SerializeField] private TextMeshProUGUI eliminationsText;
 
     //References
     [SerializeField] private EntityStats stats;
@@ -215,7 +219,26 @@ public class UIManager : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        //Statistics
+        if (GameManager.Instance != null)
+        {
+            int wavesSurvived = GameManager.Instance.CurrentWave;
+
+            if (wavesSurvived <= 0) wavesSurvived = 1;
+
+            statisticsBackground.SetActive(true);
+            finalWavesText.gameObject.SetActive(true);
+            pointsText.gameObject.SetActive(true);
+            eliminationsText.gameObject.SetActive(true);
+
+            if (wavesSurvived == 1) finalWavesText.text = $"You survived {wavesSurvived} wave";
+            else finalWavesText.text = $"You survived {wavesSurvived} waves";
+            pointsText.text = $"Points: {GameManager.Instance.TotalPoints}";
+            eliminationsText.text = $"Eliminations: {GameManager.Instance.TotalEliminations}";
+        }
     }
+
     // ----- WEAPON HUD -----
     void UpdateWeaponName(string name)
     {
@@ -280,7 +303,7 @@ public class UIManager : MonoBehaviour
         if (currentReloadCoroutine != null) StopCoroutine(currentReloadCoroutine); //Stops the previous coroutine before starting new one
 
         //Reset reload visuals
-        reloadFillImage.fillAmount = 0;
+        if (reloadFillImage != null) reloadFillImage.fillAmount = 0;
         if (reloadHUD != null) reloadHUD.SetActive(true);
 
         currentReloadCoroutine = StartCoroutine(ReloadAnimationRoutine(reloadTime)); //Starts new coroutine and saves the reference

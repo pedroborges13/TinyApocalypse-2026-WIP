@@ -23,7 +23,7 @@ public class FloatingText : MonoBehaviour
         this.pool = pool;
     }
 
-    public void Setup(int amount)
+    public void Setup(int amount, float sizeModifier)
     {
         if (textMesh != null)
         {
@@ -32,13 +32,16 @@ public class FloatingText : MonoBehaviour
 
         transform.localScale = Vector3.one * sizeModifier;
 
-        rectTransform.anchoredPosition = Vector2.zero;
+        //Offset
+        float randomX = Random.Range(-25f, 25f);
+        float randomY = Random.Range(-40f, 40f);
+
+        rectTransform.anchoredPosition = new Vector2(randomX,randomY);
 
         CancelInvoke(nameof(ReturnToPool));
         Invoke(nameof(ReturnToPool), lifeTime);
     }
 
-    // Update is called once per frame
     void Update()
     {
         rectTransform.anchoredPosition += Vector2.up * moveSpeed * Time.deltaTime;

@@ -20,6 +20,9 @@ public class PlayerWallet : MonoBehaviour
         currentMoney += amount;
         OnMoneyChanged?.Invoke(currentMoney); //Notifies UIManager
 
+        //Updates GameManager statistics
+        if (GameManager.Instance != null) GameManager.Instance.AddTotalPoints(currentMoney);
+
         if (FloatingTextManager.Instance != null)
         {
             FloatingTextManager.Instance.ShowCoinText(amount);

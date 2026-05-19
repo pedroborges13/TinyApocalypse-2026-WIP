@@ -119,7 +119,6 @@ public class EntityStats : MonoBehaviour
             }
         }
 
-
         if (CurrentHp <= 0)
         {
            anim.PlayDeath();

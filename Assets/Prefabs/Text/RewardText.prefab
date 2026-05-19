@@ -149,5 +149,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eefc3b2d54bba2e4ca7ffe04377462c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FloatingText
-  moveSpeed: 15
+  moveSpeed: 20
   lifeTime: 1.5

@@ -14,7 +14,7 @@ public class FloatingTextManager : MonoBehaviour
     [Header("Dynamic Size Settings")]
     [SerializeField] private float baseScale;
     [SerializeField] private float maxScale;
-    //[SerializeField] private int baseRewardValue;
+    [SerializeField] private int baseRewardValue;
 
     //Pool
     IObjectPool<FloatingText> textPool;
@@ -45,7 +45,7 @@ public class FloatingTextManager : MonoBehaviour
 
     void OnDestroyText(FloatingText text) => Destroy(text.gameObject);
 
-    public void ShowCoinText(int amount)
+    public void ShowCoinText(int amount) //Called in PlayerWallet
     {
         if (textPrefab == null || uiTrasform == null) return;   
 
@@ -62,9 +62,13 @@ public class FloatingTextManager : MonoBehaviour
         //Wait a very short time to capture deaths in the same frame
         yield return new WaitForSeconds(accumulationWindow);
 
+        float rawModifier = baseScale + ((float)accumulatedCoins / baseRewardValue - 1) * 0.25f;
+
+        float finalScale = Mathf.Clamp(rawModifier, baseScale, maxScale);
+
         //Gets from pool and show the total value
         FloatingText textInstance = textPool.Get();
-        textInstance.Setup(accumulatedCoins);
+        textInstance.Setup(accumulatedCoins, finalScale);
 
         //Reset
         accumulatedCoins = 0;
