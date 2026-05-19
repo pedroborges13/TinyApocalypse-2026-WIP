@@ -19,6 +19,11 @@ public class PlayerWallet : MonoBehaviour
     {
         currentMoney += amount;
         OnMoneyChanged?.Invoke(currentMoney); //Notifies UIManager
+
+        if (FloatingTextManager.Instance != null)
+        {
+            FloatingTextManager.Instance.ShowCoinText(amount);
+        }
     }
 
     public bool SpendMoney(int amount)

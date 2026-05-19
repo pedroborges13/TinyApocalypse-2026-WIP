@@ -39,9 +39,14 @@ public class KamizakeExplosion : ExplosiveBase
             if (agent != null && agent.enabled) agent.isStopped = true;
 
             TriggerExplosion();
-            GlobalEvents.OnEnemyKilled?.Invoke();
 
             stats.Death(true);
         }
+    }
+
+    protected override void HandleDestruction()
+    {
+        //Leave this method EMPTY for the Kamikaze.
+        //The stats.Death(true) sent to the pool will handle removing the object safely.
     }
 }

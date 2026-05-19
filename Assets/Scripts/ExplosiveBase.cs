@@ -24,6 +24,11 @@ public abstract class ExplosiveBase : MonoBehaviour
             explosion.Setup(radius, damage, knockback);
         }
 
+        HandleDestruction();
+    }
+
+    protected virtual void HandleDestruction()
+    {
         Destroy(gameObject);
     }
 

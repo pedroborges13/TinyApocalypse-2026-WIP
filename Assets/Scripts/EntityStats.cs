@@ -126,7 +126,6 @@ public class EntityStats : MonoBehaviour
 
             if (CompareTag("Enemy"))
             {
-                GlobalEvents.OnEnemyKilled?.Invoke();
                 DisableNavMesh();
 
                 if (TryGetComponent<EnemyDrop>(out EnemyDrop drop))
@@ -173,7 +172,12 @@ public class EntityStats : MonoBehaviour
         CanRegenerate = false;
 
         if (CompareTag("Player")) playerController.enabled = false;
-        else if (CompareTag("Enemy")) StartCoroutine(DeathRoutine(isInstantDeath));
+        else if (CompareTag("Enemy"))
+        {
+            GlobalEvents.OnEnemyKilled?.Invoke();
+            StartCoroutine(DeathRoutine(isInstantDeath));
+        }
+
     }
 
     IEnumerator DeathRoutine(bool isInstantDeath)
