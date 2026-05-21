@@ -15,7 +15,18 @@ public class MenuController : MonoBehaviour
 
     public void StartButton()
     {
+        SaveSystem.IsLoadingSave = false;
         SceneManager.LoadScene("Gameplay");
+    }
+
+    public void ContinueButton()
+    {
+        if (SaveSystem.DoesSaveExist())
+        {
+            SaveSystem.IsLoadingSave = true;
+            SceneManager.LoadScene("Gameplay");
+        }
+        else Debug.LogWarning("No Save Found!");
     }
 
     public void OptionsButton()

@@ -17756,6 +17756,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: caadb99fb9ef30049aa26a0681845290, type: 3}
   m_PrefabInstance: {fileID: 1973055524}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1113366652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1113366654}
+  - component: {fileID: 1113366653}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1113366653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113366652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51d0eba4edd2e9e4a8d823e74caba65d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  barrierPrefab: {fileID: 6599635712563957990, guid: 5937b83973af10b48abaff1408b64b80, type: 3}
+  explosiveBarrelPrefab: {fileID: 7883913805192234147, guid: 4587432ab33cf0f458f70871881e2533, type: 3}
+  landminePrefab: {fileID: 6199235734609420437, guid: 6d00e8978ad0d0e41990a8d8a02a6136, type: 3}
+--- !u!4 &1113366654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113366652}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1116194894
 GameObject:
   m_ObjectHideFlags: 0
@@ -38501,6 +38548,7 @@ SceneRoots:
   - {fileID: 1339104438}
   - {fileID: 1465220760}
   - {fileID: 4208001607107628152}
+  - {fileID: 1113366654}
   - {fileID: 540483755}
   - {fileID: 1761003510}
   - {fileID: 1852586397}

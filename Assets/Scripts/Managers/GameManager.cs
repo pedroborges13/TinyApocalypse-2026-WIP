@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     //Properties for Statiscs
     public int CurrentWave => currentWave;
     public int TotalEliminations { get; private set; }
-    public int TotalPoints { get; private set; }    
+    public int TotalPoints { get; private set; }
 
     //Events
     public event Action <GamePhase> OnGamePhaseChanged;
@@ -126,6 +126,12 @@ public class GameManager : MonoBehaviour
         if (amount > 0) TotalPoints += amount;
     } 
 
+    //Save system
+    public void RestoreWave(int waveToRestore)
+    {
+        currentWave = waveToRestore;
+        OnWaveChanged?.Invoke(currentWave);
+    }
 
     private void OnDisable()
     {

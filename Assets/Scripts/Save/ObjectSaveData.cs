@@ -16,7 +16,7 @@ public class GameSaveData
 {
     //Progress and money
     public int currentWave;
-    public int playerMoney;
+    public int currentMoney;
 
     //Equipments
     public string currentWeaponName;

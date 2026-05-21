@@ -156,6 +156,12 @@ public class WaveManager : MonoBehaviour
         Debug.Log($"Starting Wave {waveNumber}: {totalEnemies} total enemies.");
         OnWaveStarted?.Invoke();
 
+        // --- SAVE ---
+        if (SaveManager.Instance != null)
+        {
+            SaveManager.Instance.SaveGame();
+        }
+
         StartCoroutine(SpawnProceduralRoutine(totalGroups, enemiesPerGroup, currentRunnerChance, currentKamikazeChance, waveNumber));
     }
 
