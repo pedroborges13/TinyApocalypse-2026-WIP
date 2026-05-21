@@ -15,6 +15,15 @@ public class SaveManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    void Start()
+    {
+        if (SaveSystem.IsLoadingSave)
+        {
+            LoadGame();
+            SaveSystem.IsLoadingSave = false;
+        }
+    }
+
     public void SaveGame()
     {
         GameSaveData saveData = new GameSaveData();
@@ -22,14 +31,24 @@ public class SaveManager : MonoBehaviour
         // --- PLAYER DATA ---
         if (GameManager.Instance != null) saveData.currentWave = GameManager.Instance.CurrentWave;
 
+        //Finds the player's currency state manager in the scene hierarchy
         PlayerWallet wallet = FindFirstObjectByType<PlayerWallet>();
         if (wallet != null) saveData.currentMoney = wallet.Money;
 
         // BUILDINGS DATA ---
+        //Gets all placed objects (barrier, explosive barrel, etc) 
         PlaceableObject[] sceneObjects = FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
         foreach (var obj in sceneObjects)
         {
             saveData.placedObjects.Add(new ObjectSaveData { objectType = obj.ObjectType, position = obj.transform.position, rotation = obj.transform.rotation });
+        }
+
+        //Weapons
+        Inventory inventory = FindFirstObjectByType<Inventory>();
+        if (inventory != null)
+        {
+            saveData.savedWeaponNames = inventory.GetWeaponNamesInIventory();
+            saveData.savedWeaponIndex = inventory.GetCurrentWeaponIndex();
         }
 
         SaveSystem.Save(saveData);
@@ -42,11 +61,14 @@ public class SaveManager : MonoBehaviour
 
         if (saveData == null) return;
 
+        Debug.Log($"Carregando save com {saveData.placedObjects.Count} objetos.");
+
         if (GameManager.Instance != null)
         {
             GameManager.Instance.RestoreWave(saveData.currentWave);
         }
 
+        //Items
         PlaceableObject[] oldObjects = FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
         foreach (var oldObj in oldObjects) Destroy(oldObj.gameObject); 
 
@@ -58,17 +80,42 @@ public class SaveManager : MonoBehaviour
             {
                 Instantiate(prefab, objData.position, objData.rotation );
             }
+            else
+            {
+                Debug.LogWarning($"Prefab não encontrado para o tipo: {objData.objectType}");
+            }
+        }
+
+        // --- RESTORE MONEY ---
+        PlayerWallet wallet = FindFirstObjectByType<PlayerWallet>();
+        if (wallet != null) wallet.LoadMoney(saveData.currentMoney);
+
+        // --- RESTORE WEAPONS AND SHOP UI ---
+        Inventory inventory = FindFirstObjectByType<Inventory>();
+        if (inventory != null)
+        {
+            inventory.LoadInventoryState(saveData.savedWeaponNames, saveData.savedWeaponIndex);
+
+            if (ShopManager.Instance != null)
+            {
+                //Refreshes UI visual contexts so purchased weapons show up sold out
+                ShopManager.Instance.RefreshShopButtons();
+            }
         }
     }
 
     GameObject GetPrefabByType(PlacedObjectType type)
     {
-        return type switch
+        switch (type)
         {
-            PlacedObjectType.Barrier => barrierPrefab,
-            PlacedObjectType.ExplosiveBarrel => explosiveBarrelPrefab,
-            PlacedObjectType.Landmine => landminePrefab,
-            _ => null
-        };
+            case PlacedObjectType.Barrier:
+                return barrierPrefab;
+            case PlacedObjectType.ExplosiveBarrel:
+                return explosiveBarrelPrefab;
+            case PlacedObjectType.Landmine:
+                return landminePrefab;
+            default:
+                return null;
+        }
     }
 }

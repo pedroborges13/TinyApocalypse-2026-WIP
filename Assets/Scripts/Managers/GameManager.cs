@@ -45,6 +45,8 @@ public class GameManager : MonoBehaviour
         {
             WaveManager.Instance.OnWaveEnded += EnterPreparationMode;
         }
+
+        Debug.Log($"Current wave: {CurrentWave}");
     }
 
     void Update()
@@ -52,6 +54,11 @@ public class GameManager : MonoBehaviour
         if (CurrentStatus != GameStatus.Playing) return;
 
         if (CurrentPhase == GamePhase.Preparation) PreparationTimer();
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log($"Current wave: {currentWave}");
+        }
     }
 
     void PreparationTimer()
@@ -68,8 +75,8 @@ public class GameManager : MonoBehaviour
         OnGamePhaseChanged?.Invoke(CurrentPhase);
         Debug.Log($"GameState: {CurrentPhase}");
 
-        WaveManager.Instance.StartWave(currentWave);
         currentWave++;
+        WaveManager.Instance.StartWave(currentWave);
         OnWaveChanged?.Invoke(currentWave);
     }
 

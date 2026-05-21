@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.InputSystem.Composites;
@@ -9,6 +11,9 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private BuildingData itemData;
     private Inventory inventory;
     private PlayerWallet wallet;
+
+    [Header("UI Weapon Buttons")]
+    [SerializeField] private List<ShopButton> weaponButtons = new List<ShopButton>();
 
     void Awake()
     {
@@ -23,6 +28,8 @@ public class ShopManager : MonoBehaviour
         wallet = player.GetComponent<PlayerWallet>();
 
         if (BuildManager.Instance != null) BuildManager.Instance.OnBuildingPlaced += OnBuildingConfirmed;
+
+        RefreshShopButtons();
     }
 
     public void BuyWeapon(GameObject weaponPrefab, ShopButton button)
@@ -60,6 +67,33 @@ public class ShopManager : MonoBehaviour
         if (wallet.Money >= cost) wallet.SpendMoney(cost);
     }
 
+    public void RefreshShopButtons()
+    {
+        if (inventory == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+            if (player != null) inventory = player.GetComponent<Inventory>();
+        }
+
+        List<string> ownedWeaponNames = inventory.GetWeaponNamesInIventory();
+
+        foreach (ShopButton button in weaponButtons)
+        {
+            if (button != null && button.WeaponPrefab != null)
+            {
+                Weapon buttonWeapon = button.WeaponPrefab.GetComponent<Weapon>();
+
+                if (buttonWeapon != null)
+                {
+                    if (ownedWeaponNames.Contains(buttonWeapon.WeaponName))
+                    {
+                        button.SetAsPurchased();
+                    }
+                }
+            }
+        }
+    }
     void OnDestroy()
     {
         if (BuildManager.Instance != null) BuildManager.Instance.OnBuildingPlaced -= OnBuildingConfirmed;

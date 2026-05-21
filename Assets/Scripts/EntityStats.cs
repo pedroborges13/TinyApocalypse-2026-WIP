@@ -170,7 +170,11 @@ public class EntityStats : MonoBehaviour
         IsDead = true;
         CanRegenerate = false;
 
-        if (CompareTag("Player")) playerController.enabled = false;
+        if (CompareTag("Player"))
+        {
+            playerController.enabled = false;
+            SaveSystem.DeleteSave();
+        }
         else if (CompareTag("Enemy"))
         {
             GlobalEvents.OnEnemyKilled?.Invoke();

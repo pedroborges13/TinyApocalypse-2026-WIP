@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 4394863586977433349}
   - component: {fileID: 623713965180566517}
   - component: {fileID: 3002855625765850519}
+  - component: {fileID: -7226061317724309024}
   m_Layer: 3
   m_Name: ExplosiveBarrel
   m_TagString: ExplosiveBarrel
@@ -138,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6bd9c111d0a48a4399a6e0763d1f799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ExplosiveBarrel
-  explosionPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   radius: 2.5
   damage: 20
   knockback: 30
@@ -180,3 +180,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.54524994, y: 0.7854246, z: 0.57019806}
   m_Center: {x: 0.00003528595, y: 0.9793201, z: 0.0030031204}
+--- !u!114 &-7226061317724309024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7883913805192234147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e91856fb233659144a5e27da58c04bfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaceableObject
+  objectType: 1

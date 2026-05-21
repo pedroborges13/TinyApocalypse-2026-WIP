@@ -18,9 +18,9 @@ public class GameSaveData
     public int currentWave;
     public int currentMoney;
 
-    //Equipments
-    public string currentWeaponName;
-    public List<string> unlockedWeaponsNames = new List<string>();
+    //Weapons
+    public List<string> savedWeaponNames = new List<string>();
+    public int savedWeaponIndex;
 
     //Items
     public List<ObjectSaveData> placedObjects = new List<ObjectSaveData>();

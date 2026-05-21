@@ -6,7 +6,6 @@ public class ShopButton : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private GameObject weaponPrefab;
-    //[SerializeField] private Color purchasedColor;
 
     [Header("References")]
     [SerializeField] private Button myButton;
@@ -16,6 +15,11 @@ public class ShopButton : MonoBehaviour
     void Start()
     {
         if (myButton == null) myButton = GetComponent<Button>();
+    }
+
+    public GameObject WeaponPrefab
+    {
+        get { return weaponPrefab; }
     }
 
     public void BuyItemButton()

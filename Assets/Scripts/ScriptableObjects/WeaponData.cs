@@ -27,8 +27,6 @@ public class WeaponData : ScriptableObject
     [SerializeField] private int pierceCount;
     [SerializeField] private float spreadAngle;
 
-    
-
     //Visuals
     public string WeaponName => weaponName;
     public GameObject ModelPrefab => modelPrefab;

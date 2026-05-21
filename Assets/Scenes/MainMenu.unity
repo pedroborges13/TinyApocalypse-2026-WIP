@@ -1461,7 +1461,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 841949431}
         m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: StartButton
+        m_MethodName: ContinueButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8995,6 +8995,7 @@ MonoBehaviour:
   menuScreen: {fileID: 260043486}
   optionsScreen: {fileID: 1909121787}
   creditsScreen: {fileID: 1495934578}
+  continueButton: {fileID: 149544575}
 --- !u!4 &841949432
 Transform:
   m_ObjectHideFlags: 0

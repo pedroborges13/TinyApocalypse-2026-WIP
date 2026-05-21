@@ -9449,6 +9449,9 @@ MonoBehaviour:
   weapons: []
   weaponTransform: {fileID: 181642748}
   pistolPrefab: {fileID: 4462400887457251250, guid: b28950a82e38a344e8669b633506cf0f, type: 3}
+  smgPrefab: {fileID: 4025021137422932661, guid: b0686d975b2054942b561ba9b4b4456b, type: 3}
+  shotgunPrefab: {fileID: 6185028351987014469, guid: 5bd139932e545b14a87e710a7646ae38, type: 3}
+  sniperPrefab: {fileID: 243416543414937592, guid: 7c936f8b9da114847a2a346a52671ba5, type: 3}
 --- !u!114 &661780508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -21032,6 +21035,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Store
   itemData: {fileID: 11400000, guid: 13f9a0d07d99ee7419605dab95ee5b52, type: 2}
+  weaponButtons:
+  - {fileID: 767356229}
+  - {fileID: 1116194899}
+  - {fileID: 380305841}
 --- !u!4 &1339104438
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
@@ -8,14 +9,29 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
 
+    [Header("Menu Buttons")]
+    [SerializeField] private Button continueButton;
+
+    void Start()
+    {
+        CheckExistingSave();
+    }
+
     void Update()
     {
         EscButton();
     }
 
+    void CheckExistingSave()
+    { 
+        bool saveExist = SaveSystem.DoesSaveExist();
+        continueButton.interactable = saveExist;    
+    }
+
     public void StartButton()
     {
         SaveSystem.IsLoadingSave = false;
+        Time.timeScale = 1;
         SceneManager.LoadScene("Gameplay");
     }
 
@@ -24,6 +40,7 @@ public class MenuController : MonoBehaviour
         if (SaveSystem.DoesSaveExist())
         {
             SaveSystem.IsLoadingSave = true;
+            Time.timeScale = 1;
             SceneManager.LoadScene("Gameplay");
         }
         else Debug.LogWarning("No Save Found!");

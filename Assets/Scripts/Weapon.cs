@@ -32,6 +32,21 @@ public class Weapon : MonoBehaviour
     public int MaxAmmo => weaponData.MagazineSize;
     public bool IsReloading => isReloading;
 
+    public string WeaponName
+    {
+        get
+        {
+            if (weaponData != null)
+            {
+                return weaponData.WeaponName;
+            }
+            else
+            {
+                return "";
+            }
+        }
+    }
+
     public static event Action<string> OnWeaponEquipped; //Name
     public static event Action<int, int> OnAmmoChanged; //Current, max
     public static event Action<float> OnReloadStart; //Reload time

@@ -156,16 +156,9 @@ public class WaveManager : MonoBehaviour
         Debug.Log($"Starting Wave {waveNumber}: {totalEnemies} total enemies.");
         OnWaveStarted?.Invoke();
 
-        // --- SAVE ---
-        if (SaveManager.Instance != null)
-        {
-            SaveManager.Instance.SaveGame();
-        }
-
         StartCoroutine(SpawnProceduralRoutine(totalGroups, enemiesPerGroup, currentRunnerChance, currentKamikazeChance, waveNumber));
     }
 
-   
     IEnumerator SpawnProceduralRoutine(int totalGroups, int enemiesPerGroup, float runnerChance, float kamikazeChance, int waveNumber)
     {
         //Loop through all groups
@@ -253,7 +246,16 @@ public class WaveManager : MonoBehaviour
         enemiesKilled++;
         Debug.Log($"Enemies: {enemiesKilled} / {totalEnemies}");
 
-        if (enemiesKilled >= totalEnemies) OnWaveEnded?.Invoke();
+        if (enemiesKilled >= totalEnemies)
+        {
+            OnWaveEnded?.Invoke();
+
+            // --- SAVE ---
+            if (SaveManager.Instance != null)
+            {
+                SaveManager.Instance.SaveGame();
+            }
+        }
     }
 
     void OnDisable()

@@ -39,4 +39,10 @@ public class PlayerWallet : MonoBehaviour
         }
         return false;
     }
+
+    public void LoadMoney(int savedMoney)
+    {
+        currentMoney = savedMoney;
+        OnMoneyChanged?.Invoke(currentMoney);
+    }
 }

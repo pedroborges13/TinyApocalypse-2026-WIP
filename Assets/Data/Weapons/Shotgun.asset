@@ -18,7 +18,7 @@ MonoBehaviour:
   fireSound: 2
   damage: 1.5
   fireRateRPM: 65
-  knockbackForce: 1
+  knockbackForce: 2
   projectileSpeed: 80
   isAutomatic: 0
   price: 1000
