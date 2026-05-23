@@ -67,6 +67,8 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         if (GameManager.Instance != null) SubscribeToGameManager(); //GameManager events trigger in Start(), causing subscription conflict in OnEnable
+
+        if (CursorManager.Instance != null) CursorManager.Instance.SetGameplayCursor();
     }
 
     void Update()
@@ -146,6 +148,8 @@ public class UIManager : MonoBehaviour
         shopScreen.SetActive(true);
         shopButton.SetActive(false);
         startWaveButton.SetActive(false);
+
+        if (CursorManager.Instance != null) CursorManager.Instance.SetDefaultCursor();
     }
 
     public void CloseShopUI()
@@ -153,6 +157,8 @@ public class UIManager : MonoBehaviour
         shopScreen.SetActive(false);
         shopButton.SetActive(true);
         startWaveButton.SetActive(true);
+
+        if (CursorManager.Instance != null) CursorManager.Instance.SetGameplayCursor();
     }
 
     void StartGameOverScreen()

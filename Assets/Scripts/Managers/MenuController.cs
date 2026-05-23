@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject menuScreen;
     [SerializeField] private GameObject optionsScreen;
     [SerializeField] private GameObject creditsScreen;
+    [SerializeField] private GameObject savedGameScreen;
 
     [Header("Menu Buttons")]
     [SerializeField] private Button continueButton;
@@ -15,6 +16,8 @@ public class MenuController : MonoBehaviour
     void Start()
     {
         CheckExistingSave();
+
+        if (CursorManager.Instance != null) CursorManager.Instance.SetDefaultCursor();
     }
 
     void Update()
@@ -29,6 +32,23 @@ public class MenuController : MonoBehaviour
     }
 
     public void StartButton()
+    {
+        if (SaveSystem.DoesSaveExist())
+        {
+            savedGameScreen.SetActive(true);
+            menuScreen.SetActive(false);
+            optionsScreen.SetActive(false);
+            creditsScreen.SetActive(false);
+        }
+        else
+        {
+            SaveSystem.IsLoadingSave = false;
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Gameplay");
+        }
+    }
+
+    public void NewGameButton()
     {
         SaveSystem.IsLoadingSave = false;
         Time.timeScale = 1;
@@ -75,6 +95,7 @@ public class MenuController : MonoBehaviour
             menuScreen.SetActive(true);
             optionsScreen.SetActive(false);
             creditsScreen.SetActive(false);
+            savedGameScreen.SetActive(false);
             Debug.Log("Esc button");
         }
     }
