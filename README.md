@@ -84,6 +84,13 @@ The player’s architecture was split into in some scripts to avoid accumulating
 - [Wallet](Assets/Scripts/Player/PlayerWallet.cs) - Handles the player’s money and triggers events to notify any changes in the value.
 - [Inventory](Assets/Scripts/Inventory.cs) - Handles weapon management, including adding, equipping, and unequipping weapons.
 
+### Save System (JSON)
+This system was developed using JSON serialization through Unity's "JsonUtility"
+- [Save System](Assets/Scripts/Save/SaveSystem.cs) - Handles file operations such as serializing, writing, reading and deleting save files from "Application.persistentDataPath".
+- [Save Manager](Assets/Scripts/Save/SaveManager.cs) - Is responsible for gathering and restoring gameplay state data during runtime.
+- [PlaceableObjects](Assets/Scripts/Save/PlaceableObject.cs) - Every buildable object contains a "PlaceableObject" component. Objects are recreated using prefab mapping based on "PlacedObjectType".
+- [ObjectSaveData and GameSaveData](Assets/Scripts/Save/ObjectSaveData.cs) - The current implementation stores: Current wave progression, player money, inventory weapon list, all placed buildable objects in the scene, position and rotation of placed objects.
+
 ### Other Managers
 I utilised Manager scripts to organise the core systems (Audio, Build, Game, Settings, Shop, UI, and VFX), converting them into Singletons when necessary. Below, I will cover only those that haven't been explained in other sections.
 - [Audio Manager](Assets/Scripts/Managers/AudioManager.cs) - Handles all game audio through a centralised Singleton, ensuring sound continuity across scene transitions. The system utilises ScriptableObjects to define sound data. It automatically saves and loads player volume preferences using PlayerPrefs.
@@ -95,7 +102,6 @@ I utilised Manager scripts to organise the core systems (Audio, Build, Game, Set
 The project is still in development. The next steps include:
 - Additional mechanics: grenades, traps and towers.
 - Visual polish (Game feel).
-- Save system: JSON-based.
 - A bit about UI implementation (Menu, wave's info).
 - Further balancing of difficulty curves and economy.
 ---
