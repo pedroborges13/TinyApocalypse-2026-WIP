@@ -103,6 +103,7 @@ public class EnemyAI : MonoBehaviour
     {
         //Optimization: Recalculate the path to the player only at specific intervals
         pathTimer += Time.deltaTime;
+
         if (pathTimer >= updateInterval)
         {
             agent.SetDestination(playerTransform.position);

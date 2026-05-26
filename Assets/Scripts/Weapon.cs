@@ -186,20 +186,11 @@ public class Weapon : MonoBehaviour
     }
 
     //Called when I grab an object from pool using pool.Get()
-    void GetFromPool(Projectile proj)
-    {
-        proj.gameObject.SetActive(true);
-    }
+    void GetFromPool(Projectile proj) => proj.gameObject.SetActive(true);
 
     //Called when the projectile is returned to the pool using pool.Release()
-    void BackToPool(Projectile proj)
-    {
-        proj.gameObject.SetActive(false);
-    }
+    void BackToPool(Projectile proj) => proj.gameObject.SetActive(false);
 
     //Called if I try to return an object, but the pool is already full (maxPoolSize)
-    void OnDestroyPoolObject(Projectile proj)
-    {
-        Destroy(proj.gameObject);
-    }
+    void OnDestroyPoolObject(Projectile proj) => Destroy(proj.gameObject);
 }
