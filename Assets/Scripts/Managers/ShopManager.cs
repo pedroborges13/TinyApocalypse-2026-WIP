@@ -62,6 +62,15 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void StartingTowersPurchase(TowerData data)
+    {
+        if (wallet.Money >= data.Price)
+        {
+            //BuildManager.Instance.SelectBuildingToPlace(data);
+            UIManager.Instance.CloseShopUI();
+        }
+    }
+
     void OnBuildingConfirmed(int cost)
     {
         if (wallet.Money >= cost) wallet.SpendMoney(cost);

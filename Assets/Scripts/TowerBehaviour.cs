@@ -6,8 +6,6 @@ public class TowerBehaviour : MonoBehaviour
 {
     [Header("Settings")]
     [SerializeField] private float attackRange;
-    [SerializeField] private float damage;
-    [SerializeField] private float fireInterval;
     [SerializeField] private float findTargetInterval;
     [SerializeField] private float rotationSpeed;
 
@@ -39,6 +37,13 @@ public class TowerBehaviour : MonoBehaviour
         }
         else
         {
+            //Check if the target was destroyed or disabled
+            if (currentTarget == null || !currentTarget.activeInHierarchy)
+            {
+                currentTarget = null;
+                return;
+            }
+
             //If the target dies or moves out of range, lose the lock-on
             if (Vector3.Distance(transform.position, currentTarget.transform.position) > attackRange)
             {
@@ -93,6 +98,12 @@ public class TowerBehaviour : MonoBehaviour
         if (targetDirection != Vector3.zero)
         {
             Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+
+            //Multiply by a -90 degree offsett on the X because the model's natural "forward"position requires an initial X rotation of -90.
+            Quaternion correctionOffset = Quaternion.Euler(-75f, 0f, 0f);
+            targetRotation = targetRotation * correctionOffset;
+
+            //Smoothly rotation
             turretHead.rotation = Quaternion.Slerp(turretHead.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
     }
@@ -102,7 +113,7 @@ public class TowerBehaviour : MonoBehaviour
         if (Time.time >= nextFireTime)
         {
             Shoot();
-            nextFireTime = Time.time + fireInterval;
+            nextFireTime = Time.time + towerData.FireInterval;
         }
     }
 

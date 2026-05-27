@@ -65,6 +65,7 @@ public class Projectile : MonoBehaviour
     {
         damage = data.Damage;
         knockback = data.KnockbackForce;
+        currentPierce = 0; //Towers don't have
         speed = data.ProjectileSpeed;
 
         if (meshRenderer != null) meshRenderer.enabled = true;
@@ -132,6 +133,11 @@ public class Projectile : MonoBehaviour
         {
             ReturnToPool();
         }
+        else if (other.CompareTag("Projectile"))
+        {
+            ReturnToPool();
+        }
+        else ReturnToPool();
     }
 
     void ReturnToPool()

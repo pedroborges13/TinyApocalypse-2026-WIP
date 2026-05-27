@@ -135,7 +135,7 @@ public class Weapon : MonoBehaviour
             newProj.transform.position = muzzlePoint.position;
             newProj.transform.rotation = finalRotation;
 
-            newProj.Setup(weaponData);
+            newProj.SetupWeapon(weaponData);
 
             /*Instantiate the projectile at the muzzle position, but using the stabilized rotation
             GameObject newProj = Instantiate(weaponData.ProjectilePrefab, muzzlePoint.position, finalRotation);
