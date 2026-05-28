@@ -15,7 +15,7 @@ public class BuildManager : MonoBehaviour
     [Header("Ghost Visuals")]
     [SerializeField] private Color validColor = new Color(0, 1, 0, 0.5f); //Color (R, G, B, Alpha)
     [SerializeField] private Color invalidColor = new Color(1, 0, 0, 0.5f); //Color (R, G, B, Alpha)
-    private BuildingData selectedBuilding;
+    private PlaceableItemData selectedBuilding;
     private GameObject ghostObject;
     private bool isBuildingMode;
 
@@ -58,7 +58,7 @@ public class BuildManager : MonoBehaviour
         return selectedBuilding.Price;
     }
 
-    public void SelectBuildingToPlace(BuildingData data)
+    public void SelectBuildingToPlace(PlaceableItemData data)
     {
         if (selectedBuilding == data) return; //Item is already selected
         //if(selectedBuilding.Price >= ) {

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79741e7074c003949b4751f1fbc55109, type: 3}
   m_Name: Landmine
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  displayName: Landmine
+  itemName: Landmine
   price: 500
   prefab: {fileID: 6199235734609420437, guid: 6d00e8978ad0d0e41990a8d8a02a6136, type: 3}
   previewPrefab: {fileID: 6531269660700640932, guid: a8e841a1f734004488aa282b16ba5b7f, type: 3}

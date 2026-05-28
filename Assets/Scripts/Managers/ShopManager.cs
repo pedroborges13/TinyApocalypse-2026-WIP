@@ -66,7 +66,7 @@ public class ShopManager : MonoBehaviour
     {
         if (wallet.Money >= data.Price)
         {
-            //BuildManager.Instance.SelectBuildingToPlace(data);
+            BuildManager.Instance.SelectBuildingToPlace(data);
             UIManager.Instance.CloseShopUI();
         }
     }

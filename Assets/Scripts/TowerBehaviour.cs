@@ -44,6 +44,15 @@ public class TowerBehaviour : MonoBehaviour
                 return;
             }
 
+            if (currentTarget.TryGetComponent<EntityStats>(out var stats))
+            {
+                if (stats.CurrentHp <= 0)
+                {
+                    currentTarget = null;
+                    return;
+                }
+            }
+
             //If the target dies or moves out of range, lose the lock-on
             if (Vector3.Distance(transform.position, currentTarget.transform.position) > attackRange)
             {

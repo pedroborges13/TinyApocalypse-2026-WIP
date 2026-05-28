@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79741e7074c003949b4751f1fbc55109, type: 3}
   m_Name: Barrier
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
-  displayName: Barrier
+  itemName: Barrier
   price: 50
   prefab: {fileID: 6599635712563957990, guid: 5937b83973af10b48abaff1408b64b80, type: 3}
   previewPrefab: {fileID: 9109581986889262327, guid: eb8b9f4cd6ccb6e4094f8d64967096f1, type: 3}

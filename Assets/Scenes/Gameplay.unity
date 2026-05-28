@@ -3405,6 +3405,7 @@ GameObject:
   - component: {fileID: 282096643}
   - component: {fileID: 282096642}
   - component: {fileID: 282096641}
+  - component: {fileID: 282096644}
   m_Layer: 5
   m_Name: TrapButton
   m_TagString: Untagged
@@ -3429,10 +3430,10 @@ RectTransform:
   - {fileID: 923031535}
   m_Father: {fileID: 1159887163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 390, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &282096641
 MonoBehaviour:
@@ -3528,6 +3529,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282096639}
   m_CullTransparentMesh: 1
+--- !u!114 &282096644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282096639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 1
+  weaponPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 372b9888caf01d14cb3b0dd13ffa39f5, type: 2}
+  myButton: {fileID: 282096641}
+  buttonImage: {fileID: 282096642}
+  priceText: {fileID: 2145783531}
 --- !u!4 &284062091 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: c15f9a1f22b8ca4439855967f462de15, type: 3}
@@ -4742,10 +4761,10 @@ RectTransform:
   - {fileID: 1669999268}
   m_Father: {fileID: 1270405303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 655, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &380305838
 MonoBehaviour:
@@ -4853,7 +4872,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 0
   weaponPrefab: {fileID: 243416543414937592, guid: 7c936f8b9da114847a2a346a52671ba5, type: 3}
+  itemData: {fileID: 0}
   myButton: {fileID: 380305838}
   buttonImage: {fileID: 380305839}
   priceText: {fileID: 595521008}
@@ -11153,10 +11174,10 @@ RectTransform:
   - {fileID: 1798559588}
   m_Father: {fileID: 1270405303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767356226
 MonoBehaviour:
@@ -11264,7 +11285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 0
   weaponPrefab: {fileID: 4025021137422932661, guid: b0686d975b2054942b561ba9b4b4456b, type: 3}
+  itemData: {fileID: 0}
   myButton: {fileID: 767356226}
   buttonImage: {fileID: 767356227}
   priceText: {fileID: 1073104504}
@@ -11418,7 +11441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &767855296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11432,17 +11455,18 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1074926305}
+  - {fileID: 2083421463}
   - {fileID: 1760212574}
-  - {fileID: 1311542285}
   - {fileID: 1270405303}
+  - {fileID: 1311542285}
   - {fileID: 1159887163}
   - {fileID: 1776830557}
   m_Father: {fileID: 2078284585}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 60}
-  m_SizeDelta: {x: 1950, y: 850}
+  m_AnchoredPosition: {x: 0, y: 54.424}
+  m_SizeDelta: {x: 1950, y: 878.5455}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &767855297
 MonoBehaviour:
@@ -13226,6 +13250,7 @@ GameObject:
   - component: {fileID: 863221625}
   - component: {fileID: 863221624}
   - component: {fileID: 863221623}
+  - component: {fileID: 863221626}
   m_Layer: 5
   m_Name: StandardTowerButton
   m_TagString: Untagged
@@ -13250,10 +13275,10 @@ RectTransform:
   - {fileID: 727371545}
   m_Father: {fileID: 1311542285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &863221623
 MonoBehaviour:
@@ -13301,11 +13326,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1339104437}
         m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: StartingBuildingPurchase
+        m_MethodName: StartingTowersPurchase
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 13f9a0d07d99ee7419605dab95ee5b52, type: 2}
-          m_ObjectArgumentAssemblyTypeName: BuildingData, Assembly-CSharp
+          m_ObjectArgument: {fileID: 11400000, guid: ee8ed6738e94a2942b0071367f102bfa, type: 2}
+          m_ObjectArgumentAssemblyTypeName: TowerData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13349,6 +13374,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 863221621}
   m_CullTransparentMesh: 1
+--- !u!114 &863221626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863221621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 1
+  weaponPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: ee8ed6738e94a2942b0071367f102bfa, type: 2}
+  myButton: {fileID: 863221623}
+  buttonImage: {fileID: 863221624}
+  priceText: {fileID: 1256357224}
 --- !u!1001 &866785260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17447,7 +17490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -740, y: 303}
+  m_AnchoredPosition: {x: -740, y: 314}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1074926306
@@ -18054,10 +18097,10 @@ RectTransform:
   - {fileID: 879523050}
   m_Father: {fileID: 1270405303}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 390, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116194896
 MonoBehaviour:
@@ -18165,7 +18208,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 0
   weaponPrefab: {fileID: 6185028351987014469, guid: 5bd139932e545b14a87e710a7646ae38, type: 3}
+  itemData: {fileID: 0}
   myButton: {fileID: 1116194896}
   buttonImage: {fileID: 1116194897}
   priceText: {fileID: 1507729867}
@@ -18643,7 +18688,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -309}
+  m_AnchoredPosition: {x: 0, y: -320}
   m_SizeDelta: {x: 1700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1159887164
@@ -20390,7 +20435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 131}
+  m_AnchoredPosition: {x: 0, y: 142}
   m_SizeDelta: {x: 1700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1270405304
@@ -20754,6 +20799,7 @@ GameObject:
   - component: {fileID: 1298134445}
   - component: {fileID: 1298134444}
   - component: {fileID: 1298134443}
+  - component: {fileID: 1298134446}
   m_Layer: 5
   m_Name: ExpBarrelButton
   m_TagString: Untagged
@@ -20778,10 +20824,10 @@ RectTransform:
   - {fileID: 942014651}
   m_Father: {fileID: 1159887163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 655, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1298134443
 MonoBehaviour:
@@ -20877,6 +20923,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1298134441}
   m_CullTransparentMesh: 1
+--- !u!114 &1298134446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298134441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 1
+  weaponPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: dadc74909b474ce4ea886951cbac6e90, type: 2}
+  myButton: {fileID: 1298134443}
+  buttonImage: {fileID: 1298134444}
+  priceText: {fileID: 1537411936}
 --- !u!1001 &1301213458
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20980,7 +21044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -82}
+  m_AnchoredPosition: {x: 0, y: -88}
   m_SizeDelta: {x: 1700, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1311542286
@@ -23585,6 +23649,7 @@ GameObject:
   - component: {fileID: 1520054962}
   - component: {fileID: 1520054961}
   - component: {fileID: 1520054960}
+  - component: {fileID: 1520054963}
   m_Layer: 5
   m_Name: BarrierButton
   m_TagString: Untagged
@@ -23609,10 +23674,10 @@ RectTransform:
   - {fileID: 1416425698}
   m_Father: {fileID: 1159887163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 125, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1520054960
 MonoBehaviour:
@@ -23708,6 +23773,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520054958}
   m_CullTransparentMesh: 1
+--- !u!114 &1520054963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1520054958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 1
+  weaponPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: 13f9a0d07d99ee7419605dab95ee5b52, type: 2}
+  myButton: {fileID: 1520054960}
+  buttonImage: {fileID: 1520054961}
+  priceText: {fileID: 621851638}
 --- !u!4 &1524948811 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4488224487903296319, guid: 5937b83973af10b48abaff1408b64b80, type: 3}
@@ -24395,6 +24478,7 @@ GameObject:
   - component: {fileID: 1584001475}
   - component: {fileID: 1584001474}
   - component: {fileID: 1584001473}
+  - component: {fileID: 1584001476}
   m_Layer: 5
   m_Name: LandmineButton
   m_TagString: Untagged
@@ -24419,10 +24503,10 @@ RectTransform:
   - {fileID: 640244825}
   m_Father: {fileID: 1159887163}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 920, y: -80}
+  m_SizeDelta: {x: 250, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1584001473
 MonoBehaviour:
@@ -24518,6 +24602,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584001471}
   m_CullTransparentMesh: 1
+--- !u!114 &1584001476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1584001471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ee0fc4ee9540794ab55385f32c1bb22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopButton
+  itemType: 1
+  weaponPrefab: {fileID: 0}
+  itemData: {fileID: 11400000, guid: fb81faf1c5e1d164d8d9bf654e73efe2, type: 2}
+  myButton: {fileID: 1584001473}
+  buttonImage: {fileID: 1584001474}
+  priceText: {fileID: 2131158420}
 --- !u!4 &1588564408 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3082457188e1a164fa781caabbe65876, type: 3}
@@ -26878,7 +26980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -740, y: -129}
+  m_AnchoredPosition: {x: -740, y: -148}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1760212575
@@ -27752,9 +27854,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Barrier
-
-'
+  m_text: Standard
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -37088,6 +37188,142 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8213f50f35a6ee741b5f76dac768f28f, type: 3}
   m_PrefabInstance: {fileID: 2063799031}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2083421462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2083421463}
+  - component: {fileID: 2083421465}
+  - component: {fileID: 2083421464}
+  m_Layer: 5
+  m_Name: TowerText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2083421463
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083421462}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 767855296}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -740, y: 84}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2083421464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083421462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Towers
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
+  m_sharedMaterial: {fileID: -5571592025542048100, guid: b633915a7eab00342a258e5c2f50a75f, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 36
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_TextWrappingMode: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 0
+  m_ActiveFontFeatures: 6e72656b
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_EmojiFallbackSupport: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2083421465
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2083421462}
+  m_CullTransparentMesh: 1
 --- !u!4 &2086106024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4488224487903296319, guid: 5937b83973af10b48abaff1408b64b80, type: 3}
@@ -38681,63 +38917,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1001 &5758918660836918961
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4663314866739779093, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_Name
-      value: StandardTower
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.9663224
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.49999857
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.1551585
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8230691
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.56794125
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 69.214
-      objectReference: {fileID: 0}
-    - target: {fileID: 5291353022341689881, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2eb29222b4cb3a142877b8926dc48ee8, type: 3}
 --- !u!222 &6106542077058605263
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -39226,4 +39405,3 @@ SceneRoots:
   - {fileID: 1383565644}
   - {fileID: 1372507448}
   - {fileID: 1202319796}
-  - {fileID: 5758918660836918961}

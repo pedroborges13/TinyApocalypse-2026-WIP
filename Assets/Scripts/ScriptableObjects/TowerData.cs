@@ -1,10 +1,9 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Tower", menuName = "Tower/TowerData")]
-public class TowerData : ScriptableObject
+public class TowerData : PlaceableItemData
 {
     [Header("Visuals")]
-    [SerializeField] private string towerName;
     [SerializeField] private GameObject projectilePrefab;
     [SerializeField] private SoundType fireSound;
 
@@ -14,11 +13,9 @@ public class TowerData : ScriptableObject
     [SerializeField] private float knockbackForce;
     [SerializeField] private float projectileSpeed;
     [SerializeField] private bool isAutomatic;
-    [SerializeField] private int price;
 
 
     //Visuals
-    public string TowerName => towerName;
     public GameObject ProjectilePrefab => projectilePrefab;
     public SoundType FireSound => fireSound;
 
@@ -28,5 +25,4 @@ public class TowerData : ScriptableObject
     public float KnockbackForce => knockbackForce;
     public float ProjectileSpeed => projectileSpeed;
     public bool IsAutomatic => isAutomatic;
-    public int Price => price;
 }
