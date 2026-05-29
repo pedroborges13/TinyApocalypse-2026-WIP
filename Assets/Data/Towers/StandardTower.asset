@@ -15,11 +15,11 @@ MonoBehaviour:
   itemName: Standard
   price: 2000
   prefab: {fileID: 567450536938346014, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
-  previewPrefab: {fileID: 8094381993098588429, guid: ed6dfbe5c21d1c346a75dc4d78c7f9a0, type: 3}
-  size: {x: 2, y: 2}
-  projectilePrefab: {fileID: 3917754564542185514, guid: 96119a04a9f1d9446bd717767a64bb8f, type: 3}
+  previewPrefab: {fileID: 5423968532202035589, guid: ed6dfbe5c21d1c346a75dc4d78c7f9a0, type: 3}
+  itemGridSizeMultiplier: 1
+  projectilePrefab: {fileID: 842698805368729311, guid: 5c7732540733e3e4d873d4323b4b0818, type: 3}
   fireSound: 0
-  damage: 1
+  damage: 1.25
   fireRateRPM: 350
   knockbackForce: 0
   projectileSpeed: 80

@@ -121,7 +121,7 @@ public class BuildManager : MonoBehaviour
     {
         //Sets collision box size based on the grid. Multiplies by 0.9f to make the box smaller than the grid square
         //Avoids false wall collisions from edge contact
-        float checkSize = gridSize * 0.9f;
+        float checkSize = (gridSize * selectedBuilding.ItemGridSizeMultiplier) * 0.9f;
 
         Vector3 checkCenter = position + Vector3.up * 0.5f;
 

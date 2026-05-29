@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8378237586533913925}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: MuzzlePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,6 +63,59 @@ Transform:
   - {fileID: 7552165617477924383}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3509707903763514216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7147276207348645951}
+  - component: {fileID: 3303472645296010190}
+  m_Layer: 3
+  m_Name: Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7147276207348645951
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509707903763514216}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.17364816, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7552165617477924383}
+  m_LocalEulerAnglesHint: {x: 0, y: 20, z: 0}
+--- !u!65 &3303472645296010190
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3509707903763514216}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.75, y: 0.2, z: 2.75}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4665916438073659740
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +127,7 @@ GameObject:
   - component: {fileID: 4764244826029899395}
   - component: {fileID: 2005849535067984913}
   - component: {fileID: 9175925602534110199}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Gun_2_Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +218,7 @@ GameObject:
   - component: {fileID: 7903276815419941038}
   - component: {fileID: 8267994685254282615}
   - component: {fileID: 6230208317936457156}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Gun_2_Mid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +309,7 @@ GameObject:
   - component: {fileID: 3170109725903461436}
   - component: {fileID: 8997979462983829677}
   - component: {fileID: 3873428553159116526}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: StandardTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,6 +332,7 @@ Transform:
   - {fileID: 4792120658818911832}
   - {fileID: 4764244826029899395}
   - {fileID: 7903276815419941038}
+  - {fileID: 7147276207348645951}
   m_Father: {fileID: 1417064493345272250}
   m_LocalEulerAnglesHint: {x: 0, y: 70, z: 0}
 --- !u!208 &3170109725903461436
@@ -291,7 +345,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 0
-  m_Extents: {x: 0.4, y: 0.5, z: 0.4}
+  m_Extents: {x: 0.2, y: 0.5, z: 0.2}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
@@ -336,8 +390,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1.6715051, z: 1.0340238}
-  m_Center: {x: -1.2380015e-11, y: 0.8153992, z: 0.00076321885}
+  m_Size: {x: 0.22606774, y: 1.6715051, z: 0.13277628}
+  m_Center: {x: 0.005846661, y: 0.8153992, z: 0.020481007}
 --- !u!1 &9116748107389267830
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,7 +403,7 @@ GameObject:
   - component: {fileID: 4792120658818911832}
   - component: {fileID: 2482801766203210090}
   - component: {fileID: 56351876946033012}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Gun_2_Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -366,7 +420,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 125, y: 125, z: 125}
+  m_LocalScale: {x: 120, y: 120, z: 125}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7552165617477924383}

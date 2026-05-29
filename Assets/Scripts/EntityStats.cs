@@ -59,10 +59,10 @@ public class EntityStats : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space ) && cameraAnimation != null)
+        /*if (Input.GetKeyDown(KeyCode.Space ) && cameraAnimation != null)
         {
             cameraAnimation.PlayShake();
-        }
+        }*/
 
         if (IsDead || !isPlayer) return; 
 
@@ -140,6 +140,7 @@ public class EntityStats : MonoBehaviour
             {
                 OnPlayerDeath?.Invoke();
             }
+
            Death();
          }
     }

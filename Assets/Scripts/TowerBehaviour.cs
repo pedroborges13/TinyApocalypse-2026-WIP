@@ -13,6 +13,7 @@ public class TowerBehaviour : MonoBehaviour
     [SerializeField] private TowerData towerData;
     [SerializeField] private Transform turretHead;
     [SerializeField] private Transform muzzlePoint;
+    [SerializeField] private GameObject rangeVisualObject;
 
     [Header("Pool settings")]
     [SerializeField] private int defaultPoolCapacity;
@@ -22,15 +23,34 @@ public class TowerBehaviour : MonoBehaviour
     private float nextFireTime;
     private float searchTimer;
 
+    private Collider myCollider;
+
     private IObjectPool<Projectile> projectilePool;
 
     void Awake()
     {
         projectilePool = new ObjectPool<Projectile>(CreateProjectile, GetFromPool, BackToPool, OnDestroyPoolObject, false, defaultPoolCapacity, maxPoolSize);
+
+        myCollider = GetComponent<Collider>();
+    }
+
+    void Start()
+    {
+        if (rangeVisualObject != null)
+        {
+            if (rangeVisualObject.TryGetComponent<RangeCircle>(out var rangeScript))
+            {
+                rangeScript.SetupRange(attackRange);
+            }
+
+            rangeVisualObject.SetActive(false);
+        }
     }
 
     void Update()
     {
+        RightClickSelection();
+
         if (currentTarget == null)
         {
             FindTarget();
@@ -137,6 +157,34 @@ public class TowerBehaviour : MonoBehaviour
         newProj.transform.rotation = muzzlePoint.rotation;
 
         newProj.SetupTower(towerData);
+    }
+
+    void RightClickSelection()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                if (hit.collider == myCollider && rangeVisualObject != null)
+                {
+                    bool isCurrentActive = rangeVisualObject.activeSelf;
+                    rangeVisualObject.SetActive(!isCurrentActive);
+                }
+            }
+        }
+    }
+
+    void OnMouseDown()
+    {
+        //if (EventSystem.current != null)
+
+        //if (BuildManager.Instance != null && BuildManager.Instance.IsBuildingMode) 
+
+        
+        
     }
 
     //Called when the pool is empty and needs to create a brand new object
