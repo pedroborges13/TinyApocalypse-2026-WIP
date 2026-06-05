@@ -34,7 +34,8 @@ The gameplay is divided into two main phases managed by a custom Game State syst
 To optimize performance, and ensure a decoupled architecture, I utilized ScriptableObjects. This approach allows for a Data-Driven workflow, where gameplay parameters are separated from the logic, making the project scalable.
 - [EntityStats](Assets/Scripts/ScriptableObjects/EntityStatsData.cs) - Acts as a template for all living entities (Player and Enemies). It centralizes attributes like Max HP, Move Speed, and Base Damage, enabling rapid difficulty tuning without modifying prefabs.
 - [WeaponData](Assets/Scripts/ScriptableObjects/WeaponData.cs) - Defines unique behaviors for the arsenal, including damage, fire rate, knockback force, projectile speed, price, fire sound, magazine size, projetile behaviour and reload timings.
-- [BuildingData](Assets/Scripts/ScriptableObjects/BuildingData.cs) - Handles the properties of various traps and barricades, such as construction costs, prefabs and preview prefabs.
+- [PlaceableItemData](Assets/Scripts/ScriptableObjects/PlaceableItemData.cs) - An abstract base ScriptableObject that acts as a template for anything the player can buy and build (like barricades, traps, and towers). It stores data such as item names, shop prices, the actual game prefab, a transparent preview model used during placement.
+- [Tower Data](Assets/Scripts/ScriptableObjects/TowerData.cs) - A ScriptableObject that inherits from "[PlaceableItemData](Assets/Scripts/ScriptableObjects/PlaceableItemData.cs)", centralising stats like damage and knockback force, projectile speed, fire rate and sound effects.
 - [SoundLibrary](Assets/Scripts/ScriptableObjects/SoundLibraryData.cs) - A central place to organize all game sounds. It uses a list of Enums to find and play specific sound effects quickly. When the game starts, it converts the list into a Dictionary. This makes finding sounds much faster, ensuring the game doesn't lag during combat.
 - [SoundEffectData](Assets/Scripts/ScriptableObjects/SoundEffectData.cs) - Encapsulates individual audio logic, supporting multiple audio clips for the same action. It features built-in randomized pitch and volume modulation, ensuring that repetitive sounds (like weapon fire or zombie moans) remain organic and less fatiguing for the player.
 
@@ -77,6 +78,11 @@ The game uses 4 humanoid characters, all from the same asset pack (Quaternius). 
 - Multiple weapon types implemented.
 - Data-driven weapon configuration using ScriptableObjects.
 - Designed to support inventory switching and grenade systems.
+
+### Towers
+To expand the tactical tower defense mechanics, I created an automated turret system that uses data-driven configurations. This makes it much easier to balance and create new defense structures.
+- [Tower Behaviour](Assets/Scripts/TowerBehaviour.cs) - Handles the core turret logic: it detects nearby enemies, rotates to face them, and fires automatically. It also manages performance by recycling projectiles (Object Pooling).
+- [Tower Data](Assets/Scripts/ScriptableObjects/TowerData.cs) - A ScriptableObject that inherits from "[PlaceableItemData](Assets/Scripts/ScriptableObjects/PlaceableItemData.cs)", centralising stats like damage and knockback force, projectile speed, fire rate and sound effects.
   
 ### Player Architecture
 The player’s architecture was split into in some scripts to avoid accumulating too many responsibilities
