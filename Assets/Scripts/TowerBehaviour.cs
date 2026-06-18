@@ -168,23 +168,15 @@ public class TowerBehaviour : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                if (hit.collider == myCollider && rangeVisualObject != null)
+                TowerBehaviour clickedTower = hit.collider.GetComponentInParent<TowerBehaviour>();
+
+                if (clickedTower == this && rangeVisualObject != null)
                 {
                     bool isCurrentActive = rangeVisualObject.activeSelf;
                     rangeVisualObject.SetActive(!isCurrentActive);
                 }
             }
         }
-    }
-
-    void OnMouseDown()
-    {
-        //if (EventSystem.current != null)
-
-        //if (BuildManager.Instance != null && BuildManager.Instance.IsBuildingMode) 
-
-        
-        
     }
 
     //Called when the pool is empty and needs to create a brand new object

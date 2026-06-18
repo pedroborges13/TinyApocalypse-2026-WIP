@@ -18,7 +18,7 @@ MonoBehaviour:
   previewPrefab: {fileID: 5423968532202035589, guid: ed6dfbe5c21d1c346a75dc4d78c7f9a0, type: 3}
   itemGridSizeMultiplier: 1
   projectilePrefab: {fileID: 842698805368729311, guid: 5c7732540733e3e4d873d4323b4b0818, type: 3}
-  fireSound: 0
+  fireSound: 8
   damage: 1.25
   fireRateRPM: 350
   knockbackForce: 0

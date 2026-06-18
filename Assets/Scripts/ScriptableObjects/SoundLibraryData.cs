@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum SoundType { PistolShot, SubmachineShot, ShotgunShot, SniperShot, BarrelExplosion, ZombieMoan, Landmine, GuitarNoise }
+public enum SoundType { PistolShot, SubmachineShot, ShotgunShot, SniperShot, BarrelExplosion, ZombieMoan, Landmine, GuitarNoise, StandardTowerShot }
 
 [CreateAssetMenu(fileName = "SoundLibrary", menuName = "Audio/Sound Library")]
 public class SoundLibraryData : ScriptableObject
