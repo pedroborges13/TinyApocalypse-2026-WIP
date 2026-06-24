@@ -20,12 +20,14 @@ public class BuildManager : MonoBehaviour
     private bool isBuildingMode;
 
     //References
+    [SerializeField] private GridVisualizer gridVisualizer;
     private PlayerWallet wallet;
 
     //Events
     public event Action<int> OnBuildingPlaced;
 
     public bool IsBuildingMode => isBuildingMode;
+    public float GridSize => gridSize;  
 
     void Awake()
     {
@@ -69,6 +71,8 @@ public class BuildManager : MonoBehaviour
 
         //Visual ghost preview
         ghostObject = Instantiate(selectedBuilding.PreviewPrefab);
+
+        gridVisualizer.ShowGrid();
     }
 
     void HandleBuildingPosition()
@@ -165,6 +169,8 @@ public class BuildManager : MonoBehaviour
         isBuildingMode = false;
         selectedBuilding = null;
         if(ghostObject != null) Destroy(ghostObject);
+
+        gridVisualizer.HideGrid();
     }
 
     void GamePhaseChanged(GamePhase newPhase)

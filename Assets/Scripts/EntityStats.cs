@@ -32,7 +32,6 @@ public class EntityStats : MonoBehaviour
     public float MoveSpeed => moveSpeed;
 
     //Events
-    public event Action OnHealthChanged;
     public event Action OnPlayerDeath;
 
 

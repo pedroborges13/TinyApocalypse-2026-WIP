@@ -32,19 +32,19 @@ public class SaveManager : MonoBehaviour
         if (GameManager.Instance != null) saveData.currentWave = GameManager.Instance.CurrentWave;
 
         //Finds the player's currency state manager in the scene hierarchy
-        PlayerWallet wallet = FindFirstObjectByType<PlayerWallet>();
+        PlayerWallet wallet = FindAnyObjectByType<PlayerWallet>();
         if (wallet != null) saveData.currentMoney = wallet.Money;
 
         // BUILDINGS DATA ---
         //Gets all placed objects (barrier, explosive barrel, etc) 
-        PlaceableObject[] sceneObjects = FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
+        PlaceableObject[] sceneObjects = FindObjectsByType<PlaceableObject>();
         foreach (var obj in sceneObjects)
         {
             saveData.placedObjects.Add(new ObjectSaveData { objectType = obj.ObjectType, position = obj.transform.position, rotation = obj.transform.rotation });
         }
 
         //Weapons
-        Inventory inventory = FindFirstObjectByType<Inventory>();
+        Inventory inventory = FindAnyObjectByType<Inventory>();
         if (inventory != null)
         {
             saveData.savedWeaponNames = inventory.GetWeaponNamesInIventory();
@@ -69,7 +69,7 @@ public class SaveManager : MonoBehaviour
         }
 
         //Items
-        PlaceableObject[] oldObjects = FindObjectsByType<PlaceableObject>(FindObjectsSortMode.None);
+        PlaceableObject[] oldObjects = FindObjectsByType<PlaceableObject>();
         foreach (var oldObj in oldObjects) Destroy(oldObj.gameObject); 
 
         foreach (var objData in saveData.placedObjects)
@@ -87,11 +87,11 @@ public class SaveManager : MonoBehaviour
         }
 
         // --- RESTORE MONEY ---
-        PlayerWallet wallet = FindFirstObjectByType<PlayerWallet>();
+        PlayerWallet wallet = FindAnyObjectByType<PlayerWallet>();
         if (wallet != null) wallet.LoadMoney(saveData.currentMoney);
 
         // --- RESTORE WEAPONS AND SHOP UI ---
-        Inventory inventory = FindFirstObjectByType<Inventory>();
+        Inventory inventory = FindAnyObjectByType<Inventory>();
         if (inventory != null)
         {
             inventory.LoadInventoryState(saveData.savedWeaponNames, saveData.savedWeaponIndex);

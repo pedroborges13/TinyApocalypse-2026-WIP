@@ -7,14 +7,16 @@ public enum SoundType { PistolShot, SubmachineShot, ShotgunShot, SniperShot, Bar
 public class SoundLibraryData : ScriptableObject
 {
     [System.Serializable]
-    public struct SoundMapping
+    public class SoundMapping
     {
         public SoundType type; //The ID
         public SoundEffectData data; //The settings (Clips, Pitch, Volume)
     }
 
-    public List<SoundMapping> soundList;
+    [SerializeField]
+    public List<SoundMapping> soundList = new();
 
+    [System.NonSerialized]
     private Dictionary<SoundType, SoundEffectData> soundDictionary;
 
     //Converts the List into a Dictionary for faster access during gameplay
@@ -24,6 +26,12 @@ public class SoundLibraryData : ScriptableObject
 
         foreach (var mapping in soundList)
         {
+            if (mapping == null)
+                continue;
+
+            if (mapping.data == null)
+                continue;
+
             //Ensures I don't have duplicate keys
             if (!soundDictionary.ContainsKey(mapping.type))
             {
@@ -35,7 +43,7 @@ public class SoundLibraryData : ScriptableObject
     public SoundEffectData GetSound(SoundType type)
     {
         //Lazy initialization in case Initialize() wasn't called in Awake
-        //if (soundDictionary == null) Initialize();
+        if (soundDictionary == null) Initialize();
 
         //Tries to get the value.
         //Returns null and logs a warning if the Enum is missing from the list

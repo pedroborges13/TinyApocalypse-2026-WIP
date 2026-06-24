@@ -6,7 +6,7 @@ public class FloatingText : MonoBehaviour
 {
     [SerializeField] private float moveSpeed;
     [SerializeField] private float lifeTime;
-    private float sizeModifier = 1f;
+    //private float sizeModifier = 1f;
 
     private TextMeshProUGUI textMesh;
     private RectTransform rectTransform;

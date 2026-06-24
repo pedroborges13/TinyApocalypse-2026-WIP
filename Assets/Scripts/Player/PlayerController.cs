@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
     private bool isWaitingForMouseRelease;
 
     //Events
-    public static event Action OnShootPressed;
     public static event Action OnWeaponReloaded;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
