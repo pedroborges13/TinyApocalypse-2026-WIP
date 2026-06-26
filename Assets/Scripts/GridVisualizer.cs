@@ -7,6 +7,7 @@ public class GridVisualizer : MonoBehaviour
 
     [SerializeField] private int width = 20;
     [SerializeField] private int height = 20;
+    [SerializeField] private float posY;
 
     [SerializeField] private float cellSize = 1f;
 
@@ -24,17 +25,18 @@ public class GridVisualizer : MonoBehaviour
 
     void GenerateGrid()
     {
+        float offsetX = (width * cellSize) / 2f;
+        float offsetZ = (height * cellSize) / 2f;
+
+        Quaternion quadRotation = Quaternion.Euler(90f, 0f, 0f);
+
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < height; z++)
             {
-                Vector3 pos = new Vector3(x * cellSize, 0.65f, z * cellSize);
-
-                Quaternion quadRotation = Quaternion.Euler(90f, 0f, 0f);
+                Vector3 pos = new Vector3(x * cellSize - offsetX, posY, z * cellSize - offsetZ);
 
                 GameObject cell = Instantiate(cellPrefab, pos, quadRotation, transform);
-
-                Debug.Log("Generate Grid");
             }    
         }
     }   
