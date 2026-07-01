@@ -39073,6 +39073,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: StandardTower
       objectReference: {fileID: 0}
+    - target: {fileID: 1334145809624659342, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334145809624659342, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1334145809624659342, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
+      propertyPath: m_Color.r
+      value: 0.088611364
+      objectReference: {fileID: 0}
     - target: {fileID: 1417064493345272250, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.8

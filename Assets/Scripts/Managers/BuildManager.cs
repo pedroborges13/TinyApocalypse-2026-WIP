@@ -73,6 +73,7 @@ public class BuildManager : MonoBehaviour
         ghostObject = Instantiate(selectedBuilding.PreviewPrefab);
 
         gridVisualizer.ShowGrid();
+        gridVisualizer.UpdateGrid(this);
     }
 
     void HandleBuildingPosition()
@@ -92,6 +93,7 @@ public class BuildManager : MonoBehaviour
             bool isSpaceFree = IsValidPosition(targetPosition); //Check if the position is valid
             bool hasMoney = wallet.Money >= selectedBuilding.Price; //Check if the position is valid           
             bool canPlace = isSpaceFree && hasMoney;
+            gridVisualizer.UpdateGrid(this);
             UpdateGhostColor(canPlace); //Changes ghost colour in real time
 
             //Checks if clicking on UI (to avoid accidental building when clicking a button)
@@ -121,7 +123,7 @@ public class BuildManager : MonoBehaviour
         return new Vector3 (x, y, z);
     }
 
-    bool IsValidPosition(Vector3 position)
+    public bool IsValidPosition(Vector3 position)
     {
         //Sets collision box size based on the grid. Multiplies by 0.9f to make the box smaller than the grid square
         //Avoids false wall collisions from edge contact
