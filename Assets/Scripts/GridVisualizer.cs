@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.Rendering;
@@ -11,6 +12,10 @@ public class GridVisualizer : MonoBehaviour
     [SerializeField] private float posY;
 
     [SerializeField] private float cellSize = 1f;
+
+    //Colors
+    private readonly Color validColor = new(0, 1, 0, 0.2f); //Green
+    private readonly Color invalidColor = new(1, 0, 0, 0.2f); //Red
 
     private GridCell[,] cells;  //Stores references to every generated GridCell. This allows changing colours later without searching the scene.
 
@@ -37,7 +42,6 @@ public class GridVisualizer : MonoBehaviour
         {
             for (int z = 0; z < height; z++)
             {
-                //Vector3 pos = GetCellPosition(x, z);
                 Vector3 pos = new Vector3(x * cellSize - offsetX, posY, z * cellSize - offsetZ);
 
                 GameObject cell = Instantiate(cellPrefab, pos, quadRotation, transform);
@@ -57,25 +61,16 @@ public class GridVisualizer : MonoBehaviour
         {
             for (int z = 0; z < height; z++)
             {
-                //Vector3 pos = GetCellPosition(x, z);
-                Vector3 pos = new Vector3(x * cellSize - offsetX, posY, z * cellSize - offsetZ);
+                //y = 0 because BuildManager checks collisions relative to the ground. Using the visual grid height (posY) would offset the CheckBox upward and produce incorrect results.
+                Vector3 pos = new Vector3(x * cellSize - offsetX, 0, z * cellSize - offsetZ); 
 
                 //Ask BuildManager if this location is valid.
                 bool valid = buildManager.IsValidPosition(pos);
 
-                if (valid) cells[x, z].SetColor(new Color(0, 1, 0, 0.2f));
-                else cells[x, z].SetColor(new Color(1, 0, 0, 0.2f));
+                if (valid) cells[x, z].SetColor(validColor); //Green
+                else cells[x, z].SetColor(invalidColor); //Red
             }
         }
-    }
-
-    private Vector3 GetCellPosition(int x, int z)
-    {
-        float offsetX = (width * cellSize) / 2f;
-        float offsetZ = (height * cellSize) / 2f;
-
-        //Calculate this cell's position.
-        return new Vector3(x * cellSize - offsetX, posY,  z * cellSize - offsetZ);
     }
 
     public void SetColor(int x, int z, Color color)

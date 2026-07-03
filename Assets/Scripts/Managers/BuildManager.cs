@@ -27,7 +27,9 @@ public class BuildManager : MonoBehaviour
     public event Action<int> OnBuildingPlaced;
 
     public bool IsBuildingMode => isBuildingMode;
-    public float GridSize => gridSize;  
+    public float GridSize => gridSize;
+
+    private Vector3 lastGridPosition = Vector3.positiveInfinity;
 
     void Awake()
     {
@@ -89,11 +91,16 @@ public class BuildManager : MonoBehaviour
             Vector3 targetPosition = SnapToGrid(hit.point);
             ghostObject.transform.position = targetPosition;
 
+            //Update the grid only when the mouse enters a different cell.
+            if (targetPosition != lastGridPosition)
+            {
+                lastGridPosition = targetPosition;
+                gridVisualizer.UpdateGrid(this);
+            }
             
             bool isSpaceFree = IsValidPosition(targetPosition); //Check if the position is valid
             bool hasMoney = wallet.Money >= selectedBuilding.Price; //Check if the position is valid           
             bool canPlace = isSpaceFree && hasMoney;
-            gridVisualizer.UpdateGrid(this);
             UpdateGhostColor(canPlace); //Changes ghost colour in real time
 
             //Checks if clicking on UI (to avoid accidental building when clicking a button)
@@ -173,6 +180,7 @@ public class BuildManager : MonoBehaviour
         if(ghostObject != null) Destroy(ghostObject);
 
         gridVisualizer.HideGrid();
+        lastGridPosition = Vector3.positiveInfinity;
     }
 
     void GamePhaseChanged(GamePhase newPhase)
