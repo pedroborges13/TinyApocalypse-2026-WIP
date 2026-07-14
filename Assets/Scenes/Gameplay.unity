@@ -9390,6 +9390,7 @@ MonoBehaviour:
   aimLayer:
     serializedVersion: 2
     m_Bits: 200
+  gravity: -20
 --- !u!65 &661780500
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23337,8 +23338,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridVisualizer
   cellPrefab: {fileID: 8312795444689903620, guid: b0cff68a69285034ba1b6963a4097f2d, type: 3}
-  width: 45
-  height: 45
+  width: 40
+  height: 40
   posY: 0.6
   cellSize: 1
 --- !u!1001 &1471369973

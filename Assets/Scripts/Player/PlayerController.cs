@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour
     [Header("Layer")]
     [SerializeField] private LayerMask aimLayer;
 
-    //Mouse position
-    private Vector3 mouseWorldPosition;
+    [SerializeField] private float gravity = -20f;
+    private float verticalVelocity;
 
     private bool isWaitingForMouseRelease;
 
@@ -52,10 +52,22 @@ public class PlayerController : MonoBehaviour
         //Normalizes the vector to 1 to limit the speed
         Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f && controller.enabled)
+        /*if (direction.magnitude >= 0.1f && controller.enabled)
         {
             controller.Move(direction * currentSpeed * Time.deltaTime);
+        }*/
+
+        if (controller.isGrounded && verticalVelocity < 0)
+        {
+            verticalVelocity = -2f;
         }
+
+        verticalVelocity += gravity * Time.deltaTime;
+
+        Vector3 movement = direction * currentSpeed;
+        movement.y = verticalVelocity;
+
+        controller.Move(movement * Time.deltaTime);
     }
 
     void PlayerRotation()

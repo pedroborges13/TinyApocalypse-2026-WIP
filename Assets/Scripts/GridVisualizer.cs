@@ -25,6 +25,8 @@ public class GridVisualizer : MonoBehaviour
     {
         GenerateGrid();
         HideGrid();
+
+        Debug.Log($"CellSize: {cellSize}");
     }
 
     void GenerateGrid()
@@ -57,18 +59,29 @@ public class GridVisualizer : MonoBehaviour
         float offsetX = (width * cellSize) / 2f; 
         float offsetZ = (height * cellSize) / 2f;
 
+
         for (int x = 0; x < width; x++)
         {
             for (int z = 0; z < height; z++)
             {
                 //y = 0 because BuildManager checks collisions relative to the ground. Using the visual grid height (posY) would offset the CheckBox upward and produce incorrect results.
-                Vector3 pos = new Vector3(x * cellSize - offsetX, 0, z * cellSize - offsetZ); 
+                Vector3 pos = new Vector3(x * cellSize - offsetX, 0, z * cellSize - offsetZ);
 
                 //Ask BuildManager if this location is valid.
                 bool valid = buildManager.IsValidPosition(pos);
 
                 if (valid) cells[x, z].SetColor(validColor); //Green
                 else cells[x, z].SetColor(invalidColor); //Red
+
+                if (x == 1 && z == 7)
+                {
+                    Debug.Log("GV: "+ pos);
+                }
+
+                if (!valid)
+                {
+                    Debug.DrawLine(pos, pos + Vector3.up * 2, Color.red, 0.1f);
+                }
             }
         }
     }

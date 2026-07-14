@@ -42,6 +42,8 @@ public class BuildManager : MonoBehaviour
         if(GameManager.Instance != null) GameManager.Instance.OnGamePhaseChanged += GamePhaseChanged;
 
         wallet = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerWallet>();
+
+        Debug.Log($"GridSize: {gridSize}");
     }
 
     void Update()
@@ -103,6 +105,8 @@ public class BuildManager : MonoBehaviour
             bool canPlace = isSpaceFree && hasMoney;
             UpdateGhostColor(canPlace); //Changes ghost colour in real time
 
+            Debug.Log("BM: " + targetPosition);
+
             //Checks if clicking on UI (to avoid accidental building when clicking a button)
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
@@ -119,6 +123,8 @@ public class BuildManager : MonoBehaviour
                 }
             }
         }
+
+
     }
 
     Vector3 SnapToGrid(Vector3 originalPosition)
