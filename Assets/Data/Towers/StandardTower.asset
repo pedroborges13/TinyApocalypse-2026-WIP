@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StandardTower
   m_EditorClassIdentifier: Assembly-CSharp::TowerData
   itemName: Standard
-  price: 2000
+  price: 10000
   prefab: {fileID: 567450536938346014, guid: 9fd54df752f28ce468962ce5ad810111, type: 3}
   previewPrefab: {fileID: 5423968532202035589, guid: ed6dfbe5c21d1c346a75dc4d78c7f9a0, type: 3}
   itemGridSizeMultiplier: 1

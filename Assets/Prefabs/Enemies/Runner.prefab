@@ -205,6 +205,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
@@ -863,6 +864,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityStats
   canReceiveKnockback: 1
   data: {fileID: 11400000, guid: 81be271d7e137954f9545123bb826630, type: 2}
+  cameraAnimation: {fileID: 0}
 --- !u!114 &8199334901079264776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea79631618cda984ca1dfd2b88cf4c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDrop
-  moneyReward: 20
+  moneyReward: 100
 --- !u!114 &6454020466543670867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,6 +1862,7 @@ SkinnedMeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   serializedVersion: 2
   m_Quality: 0
   m_UpdateWhenOffscreen: 0

@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea79631618cda984ca1dfd2b88cf4c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDrop
-  moneyReward: 300
+  moneyReward: 1000
 --- !u!114 &5250587736756721674
 MonoBehaviour:
   m_ObjectHideFlags: 0

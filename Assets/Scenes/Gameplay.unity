@@ -9498,7 +9498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a5173e558db5024f96547e781b265a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWallet
-  currentMoney: 25000
+  currentMoney: 0
 --- !u!114 &661780509
 MonoBehaviour:
   m_ObjectHideFlags: 0

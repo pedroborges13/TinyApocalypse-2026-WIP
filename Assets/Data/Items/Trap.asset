@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trap
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
   itemName: Trap
-  price: 100
+  price: 500
   prefab: {fileID: 5373598484326349458, guid: 9bae838f9a0a8a5448f5eb33a50de958, type: 3}
   previewPrefab: {fileID: 8825564589007492842, guid: 5f957b7282e08cd47b4888a50a8e8f24, type: 3}
-  size: {x: 1, y: 1}
+  itemGridSizeMultiplier: 0

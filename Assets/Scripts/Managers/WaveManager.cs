@@ -110,7 +110,7 @@ public class WaveManager : MonoBehaviour
         int totalGroups = 2 + Mathf.FloorToInt(waveNumber / 3f);
 
         //Enemies per group: (Base 5 + 2 every 4 rounds)
-        int enemiesPerGroup = 5 + (Mathf.FloorToInt(waveNumber / 4f) * 2);
+        int enemiesPerGroup = 5 + (Mathf.FloorToInt(waveNumber / 4f) * 2) + waveNumber;
 
         //----- RUNNER ENEMY SPAWN LOGIC -----
         //Runner enemy spawn chance

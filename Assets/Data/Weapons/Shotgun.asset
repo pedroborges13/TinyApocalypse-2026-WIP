@@ -21,7 +21,7 @@ MonoBehaviour:
   knockbackForce: 2
   projectileSpeed: 80
   isAutomatic: 0
-  price: 1000
+  price: 5000
   magazineSize: 6
   reloadTime: 3
   projPerShot: 7

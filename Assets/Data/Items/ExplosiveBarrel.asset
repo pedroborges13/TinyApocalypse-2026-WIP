@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ExplosiveBarrel
   m_EditorClassIdentifier: Assembly-CSharp::BuildingData
   itemName: ExplosiveBarrel
-  price: 500
+  price: 1000
   prefab: {fileID: 7883913805192234147, guid: 4587432ab33cf0f458f70871881e2533, type: 3}
   previewPrefab: {fileID: 1197031688785872741, guid: 04912f48233577747ba2a60c0aef3bd0, type: 3}
-  size: {x: 1, y: 1}
+  itemGridSizeMultiplier: 0
