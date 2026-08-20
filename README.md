@@ -1,12 +1,8 @@
 # Tiny Apocalypse (Work in Progress)
 Tiny Apocalypse is a personal project currently under development. It is a 3D Top-Down Shooter with Tower Defense mechanics, where players must survive infinite waves of enemies by building defenses and upgrading their arsenal.
 
-Project Started: Late January 2026.
-
-README Last Updated: April 24, 2026.
-
-<img width="400" height="170" alt="TinyClip2" src="https://github.com/user-attachments/assets/8f76c554-8c65-4567-9ec7-50cb5fcef456" />
-<img width="400" height="170" alt="TinyClip1" src="https://github.com/user-attachments/assets/ac3a193c-f0b6-4d8e-b09b-0586e5043a5c" />
+<img width="400" height="226" alt="WhatsApp Video 2026-08-19 at 22 10 41" src="https://github.com/user-attachments/assets/bf6e6e6e-6b55-4574-ad5f-64b4bd8e88bc" />
+<img width="400" height="226" alt="TinyClip2" src="https://github.com/user-attachments/assets/8f76c554-8c65-4567-9ec7-50cb5fcef456" />
 
 ---
 ## 🎮 Game Overview
@@ -69,8 +65,8 @@ The game uses 4 humanoid characters, all from the same asset pack (Quaternius). 
 ### Building System
 - [Building Manager](Assets/Scripts/Managers/BuildManager.cs) - The building system allows players to strategically place defenses during the Preparation Phase. It features a grid-based alignment system and real-time visual feedback.
 - [Shop Manager](Assets/Scripts/Managers/ShopManager.cs) - Acts as the central hub for the game's economy, handling transactions for both weapons and structures. It ensures that players can only progress when they have sufficient resources.
-- Grid-less placement system using raycasts on the ground. - The system uses Camera.main.ScreenPointToRay combined with Physics.Raycast to translate 2D mouse coordinates into 3D world space. I utilized LayerMasks, allowing the ray to focus only on valid buildable surfaces.
-- Preview-based placement with validation logic. - Ensures that structures are perfectly aligned, which is crucial for building effective barricades and traps
+- [Grid Visualizer](Assets/Scripts/GridVisualizer.cs) - Preview-based placement with validation logic. - Ensures that structures are perfectly aligned, which is crucial for building effective barricades and traps
+- The system uses Camera.main.ScreenPointToRay combined with Physics.Raycast to translate 2D mouse coordinates into 3D world space. I utilized LayerMasks, allowing the ray to focus only on valid buildable surfaces.
 - Designed to support future expansion (blocking paths, traps, NavMesh obstacles).
 
 ### Combat & Weapons
@@ -106,7 +102,7 @@ I utilised Manager scripts to organise the core systems (Audio, Build, Game, Set
 ---
 ## Future Implementation
 The project is still in development. The next steps include:
-- Additional mechanics: grenades, traps and towers.
+- Additional mechanics: grenades, traps and more towers.
 - Visual polish (Game feel).
 - A bit about UI implementation (Menu, wave's info).
 - Further balancing of difficulty curves and economy.
